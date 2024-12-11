@@ -1,0 +1,3200 @@
+#########################################
+#			  Created by				#
+#			     Vivit					#
+#########################################
+
+country_decisions = {
+    # Make space for a soldier's household
+	# Will delete a farm estate manufactory if one exists in a valid province
+	vvtqol_buildingmenu_make_space_soldier_household = {
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_enabled
+            adm_tech = 15
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {
+            any_owned_province = {
+				OR = {
+					trade_goods = grain
+					trade_goods = livestock
+					trade_goods = wine
+					trade_goods = fish
+				}
+			}
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_make_space_soldier_household_tooltip
+			every_owned_province = {
+				# If there is a farm estate we have to delete it in order to place a soldier's household.
+				if = {
+                    limit = {
+						has_building = farm_estate
+					}
+					
+					remove_building = farm_estate
+                }
+
+				# If it is a fish province with a manufactory we have to delete it in order to place a soldier's household.
+				if = {
+					limit = {
+						has_building = wharf
+						trade_goods = fish
+					}
+
+					remove_building = wharf
+				}
+            }
+        }
+    }
+
+	# Will highlight provinces where soldier's household can be placed if all conditions are met
+    vvtqol_buildingmenu_highlight_provinces_soldier_household = {
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_enabled
+            adm_tech = 15
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {
+			any_owned_province = {
+				OR = {
+					trade_goods = grain
+					trade_goods = livestock
+					trade_goods = fish
+					trade_goods = wine
+				}
+				NOT = {
+					has_building = soldier_households
+				}
+			}
+        }
+
+        provinces_to_highlight = {
+			OR = {
+				AND = {
+					OR = {
+						trade_goods = grain
+						trade_goods = livestock
+						trade_goods = fish
+						trade_goods = wine
+					}
+					owned_by = ROOT
+					NOT = {
+						has_building = soldier_households
+					}
+				}
+			}
+		}
+
+        effect = {
+			custom_tooltip = vvtqol_buildingmenu_highlight_provinces_soldier_household_desc
+		}
+    }
+
+	# Make space for a impressment office
+	# Will delete a manufactory if one exists in a valid province
+	vvtqol_buildingmenu_make_space_impressment_office = {
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_enabled
+            dip_tech = 7
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {
+            any_owned_province = {
+				OR = {
+					trade_goods = salt
+					trade_goods = fish
+					trade_goods = naval_supplies
+					trade_goods = tropical_wood
+				}
+			}
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_make_space_impressment_office_tooltip
+			every_owned_province = {
+				# If there is a wharf we have to delete it in order to place a impressment office.
+				if = {
+                    limit = {
+						has_building = wharf
+					}
+					
+					remove_building = wharf
+                }
+            }
+        }
+    }
+
+	# Will highlight provinces where soldier's household can be placed if all conditions are met
+    vvtqol_buildingmenu_highlight_provinces_impressment_office = {
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_enabled
+            dip_tech = 7
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {
+			any_owned_province = {
+				OR = {
+					trade_goods = fish
+					trade_goods = salt
+					trade_goods = naval_supplies
+					trade_goods = tropical_wood
+				}
+				NOT = {
+					has_building = impressment_offices
+				}
+			}
+        }
+
+        provinces_to_highlight = {
+			OR = {
+				AND = {
+					OR = {
+						trade_goods = fish
+						trade_goods = salt
+						trade_goods = naval_supplies
+						trade_goods = tropical_wood
+					}
+					owned_by = ROOT
+					NOT = {
+						has_building = impressment_offices
+					}
+				}
+			}
+		}
+
+        effect = {
+			custom_tooltip = vvtqol_buildingmenu_highlight_provinces_impressment_office_desc
+		}
+    }
+
+	# Will highlight provinces with high defensive potential.
+	vvtqol_buildingmenu_highlight_defensive_provinces = {
+		color = { 170 4 120 }
+		potential = {
+			ai = no
+			has_country_flag = vvtqol_buildingmenu_enabled
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+
+		allow = {
+			any_owned_province = {
+				owned_by = ROOT
+				OR = {
+					vvtqol_trigger_is_friendly_border_province = yes	
+					OR = {
+						has_terrain = mountain	
+						has_terrain = highlands	
+						has_terrain = hills	
+						has_terrain = marsh
+					}
+				}
+			}
+		}
+
+		provinces_to_highlight = {
+			owned_by = ROOT
+			OR = {
+				vvtqol_trigger_is_friendly_border_province = yes	
+				OR = {
+					has_terrain = mountain	
+					has_terrain = highlands	
+					has_terrain = hills	
+					has_terrain = marsh
+				}
+			}
+		}
+
+		effect = {
+			custom_tooltip = vvtqol_buildingmenu_highlight_defensive_provinces_desc
+		}
+	}
+
+	vvtqol_buildingmenu_upgrade_border_defences = {
+		color = { 170 4 120 }
+		potential = {
+			ai = no
+			has_country_flag = vvtqol_buildingmenu_enabled
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+
+		allow = {
+			any_owned_province = {
+				vvtqol_trigger_is_friendly_border_province = yes
+				OR = {
+					has_building = fort_15th
+					has_building = fort_16th
+					has_building = fort_17th
+					has_building = fort_18th
+				}
+				AND = {
+					NOT = {
+						has_building = ramparts
+					}
+					OR = {
+						has_building = fort_15th
+						has_building = fort_16th
+						has_building = fort_17th
+						has_building = fort_18th
+					}
+				}
+			}
+		}
+
+		effect = {
+			custom_tooltip = vvtqol_buildingmenu_upgrade_border_defences_desc
+			hidden_effect = {		
+				every_owned_province = {
+					limit = {
+						vvtqol_trigger_is_friendly_border_province = yes
+						has_building = fort_15th
+					}
+					
+					if = {
+						limit = {
+							ROOT = { mil_tech = 24 }
+							can_build = fort_18th
+						}
+						add_building = fort_18th
+						ROOT = { add_treasury = -600 }
+					}
+
+					else_if = {
+						limit = {
+							ROOT = { mil_tech = 19 }
+							can_build = fort_17th
+						}
+						add_building = fort_17th
+						ROOT = { add_treasury = -400 }
+					}
+
+					else_if = {
+						limit = {
+							ROOT = { mil_tech = 14 }
+							can_build = fort_16th
+						}
+						add_building = fort_16th
+						ROOT = { add_treasury = -200 }
+					}
+				}
+			
+			
+				every_owned_province = {
+					limit = {
+						vvtqol_trigger_is_friendly_border_province = yes
+						has_building = fort_16th
+					}
+					
+					if = {
+						limit = {
+							ROOT = { mil_tech = 24 }
+							can_build = fort_18th
+						}
+						add_building = fort_18th
+						ROOT = { add_treasury = -400 }
+					}
+
+					else_if = {
+						limit = {
+							ROOT = { mil_tech = 19 }
+							can_build = fort_17th
+						}
+						add_building = fort_17th
+						ROOT = { add_treasury = -200 }
+					}
+				}
+
+				every_owned_province = {
+					limit = {
+						vvtqol_trigger_is_friendly_border_province = yes
+						has_building = fort_17th
+					}
+					
+					if = {
+						limit = {
+							ROOT = { mil_tech = 24 }
+							can_build = fort_18th
+						}
+						add_building = fort_18th
+						ROOT = { add_treasury = -200 }
+					}
+				}
+
+				every_owned_province = {
+					limit = {
+						vvtqol_trigger_is_friendly_border_province = yes
+						OR = {
+							has_building = fort_15th
+							has_building = fort_16th
+							has_building = fort_17th
+							has_building = fort_18th
+						}
+					}
+
+					if = {
+						limit = {
+							OR = {
+								can_build = ramparts	
+								OR = {
+									has_building = wharf
+									has_building = textile
+									has_building = weapons
+									has_building = plantations
+									has_building = tradecompany
+									has_building = farm_estate
+									has_building = mills
+								}
+							}
+						}
+						
+						remove_building = wharf
+						remove_building = textile
+						remove_building = weapons
+						remove_building = plantations
+						remove_building = tradecompany
+						remove_building = farm_estate
+						remove_building = mills
+
+						add_building = ramparts
+						ROOT = { add_treasury = -500 }	
+					}
+				}
+			}
+		}
+	}
+
+	vvtqol_buildingmenu_upgrade_country_defences = {
+		color = { 170 4 120 }
+		potential = {
+			ai = no
+			has_country_flag = vvtqol_buildingmenu_enabled
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+
+		allow = {
+			any_owned_province = {
+				OR = {
+					OR = {
+						has_building = fort_15th
+						has_building = fort_16th
+						has_building = fort_17th
+					}
+					AND = {
+						NOT = {
+							has_building = ramparts
+						}
+						OR = {
+							has_building = fort_15th
+							has_building = fort_16th
+							has_building = fort_17th
+							has_building = fort_18th
+						}
+					}
+				}
+			}
+		}
+
+		effect = {
+			custom_tooltip = vvtqol_buildingmenu_upgrade_border_defences_desc
+			
+			hidden_effect = {		
+				every_owned_province = {
+					limit = {
+						has_building = fort_15th
+					}
+					
+					if = {
+						limit = {
+							ROOT = { mil_tech = 24 }
+							can_build = fort_18th
+							ROOT = { treasury = 600 }
+						}
+						add_building = fort_18th
+						ROOT = { add_treasury = -600 }
+					}
+
+					else_if = {
+						limit = {
+							ROOT = { mil_tech = 19 }
+							can_build = fort_17th
+							ROOT = { treasury = 400 }
+						}
+						add_building = fort_17th
+						ROOT = { add_treasury = -400 }
+					}
+
+					else_if = {
+						limit = {
+							ROOT = { mil_tech = 14 }
+							can_build = fort_16th
+							ROOT = { treasury = 200 }
+						}
+						add_building = fort_16th
+						ROOT = { add_treasury = -200 }
+					}
+				}
+			
+				every_owned_province = {
+					limit = {
+						has_building = fort_16th
+					}
+					
+					if = {
+						limit = {
+							ROOT = { mil_tech = 24 }
+							can_build = fort_18th
+							ROOT = { treasury = 400 }
+						}
+						add_building = fort_18th
+						ROOT = { add_treasury = -400 }
+					}
+
+					else_if = {
+						limit = {
+							ROOT = { mil_tech = 19 }
+							can_build = fort_17th
+							ROOT = { treasury = 200 }
+						}
+						add_building = fort_17th
+						ROOT = { add_treasury = -200 }
+					}
+				}
+
+				every_owned_province = {
+					limit = {
+						has_building = fort_17th
+					}
+					
+					if = {
+						limit = {
+							ROOT = { mil_tech = 24 }
+							can_build = fort_18th
+							ROOT = { treasury = 200 }
+						}
+						add_building = fort_18th
+						ROOT = { add_treasury = -200 }
+					}
+				}
+
+				every_owned_province = {
+					limit = {
+						OR = {
+							has_building = fort_15th
+							has_building = fort_16th
+							has_building = fort_17th
+							has_building = fort_18th
+						}
+					}
+
+					if = {
+						limit = {
+							ROOT = { treasury = 500 }
+							OR = {
+								can_build = ramparts	
+								OR = {
+									has_building = wharf
+									has_building = textile
+									has_building = weapons
+									has_building = plantations
+									has_building = tradecompany
+									has_building = farm_estate
+									has_building = mills
+								}
+							}
+						}
+						
+						remove_building = wharf
+						remove_building = textile
+						remove_building = weapons
+						remove_building = plantations
+						remove_building = tradecompany
+						remove_building = farm_estate
+						remove_building = mills
+
+						add_building = ramparts
+						ROOT = { add_treasury = -500 }	
+					}
+				}
+			}
+		}
+	}
+
+    vvtqol_buildingmenu_build_temple = {   
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_buildsubmenu_enabled
+            adm_tech = 4
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {
+			any_owned_province = {
+                vvtqol_trigger_can_construct_building = { BUILDING = temple BUILDING_COST = 100 }
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_begin_building_construction_tooltip
+            vvtqol_effect_build_building_while_can_afford = { BUILDING = temple BUILDING_COST = 100 }
+        }
+    }
+
+    vvtqol_buildingmenu_destroy_temple = {
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_destroysubmenu_enabled
+            adm_tech = 4
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+        
+        allow = {
+            any_owned_province = {
+                has_building = temple
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_delete_building_type_tooltip
+            hidden_effect = {
+                every_owned_province = {
+                    limit = {
+                        has_building = temple
+                    }
+                    remove_building = temple
+                }
+            }
+        }
+    }
+
+    vvtqol_buildingmenu_build_cathedral = {
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_buildsubmenu_enabled
+            adm_tech = 19
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {
+            any_owned_province = {
+                vvtqol_trigger_can_construct_building = { BUILDING = cathedral BUILDING_COST = 300 }
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_begin_building_construction_tooltip
+            vvtqol_effect_build_building_while_can_afford = { BUILDING = cathedral BUILDING_COST = 300 }
+        }
+    }
+
+    vvtqol_buildingmenu_destroy_cathedral = {
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_destroysubmenu_enabled
+            adm_tech = 19
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+        
+        allow = {
+            any_owned_province = {
+                has_building = cathedral
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_delete_building_type_tooltip
+            hidden_effect = {
+                every_owned_province = {
+                    limit = {
+                        has_building = cathedral 
+                    }
+                    remove_building = cathedral
+                }
+            }
+        }
+    }
+
+    vvtqol_buildingmenu_build_marketplace = {
+        
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_buildsubmenu_enabled
+            dip_tech = 4
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {
+            any_owned_province = {
+                vvtqol_trigger_can_construct_building = { BUILDING = marketplace BUILDING_COST = 100 }
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_begin_building_construction_tooltip
+            vvtqol_effect_build_building_while_can_afford = { BUILDING = marketplace BUILDING_COST = 100 }
+        }
+    }
+
+    vvtqol_buildingmenu_destroy_marketplace = {
+        
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_destroysubmenu_enabled
+            dip_tech = 4
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+        
+        allow = {
+            any_owned_province = {
+                has_building = marketplace
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_delete_building_type_tooltip
+            hidden_effect = {
+                every_owned_province = {
+                    limit = {
+                        has_building = marketplace 
+                    }
+                    remove_building = marketplace
+                }
+            }
+        }
+    }
+
+    vvtqol_buildingmenu_build_trade_depot = {
+        
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_buildsubmenu_enabled
+            dip_tech = 17
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {
+            any_owned_province = {
+                vvtqol_trigger_can_construct_building = { BUILDING = trade_depot BUILDING_COST = 300 }
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_begin_building_construction_tooltip
+            vvtqol_effect_build_building_while_can_afford = { BUILDING = trade_depot BUILDING_COST = 300 }
+        }
+    }
+
+    vvtqol_buildingmenu_destroy_trade_depot = {
+        
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_destroysubmenu_enabled
+            dip_tech = 17
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+        
+        allow = {
+            any_owned_province = {
+                has_building = trade_depot
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_delete_building_type_tooltip
+            hidden_effect = {
+                every_owned_province = {
+                    limit = {
+                        has_building = trade_depot 
+                    }
+                    remove_building = trade_depot
+                }
+            }
+        }
+    }
+
+    vvtqol_buildingmenu_build_stock_exchange = {
+        
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_buildsubmenu_enabled
+            dip_tech = 22
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {
+            any_owned_province = {
+                vvtqol_trigger_can_construct_building = { BUILDING = stock_exchange BUILDING_COST = 400 }
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_begin_building_construction_tooltip
+            vvtqol_effect_build_building_while_can_afford = { BUILDING = stock_exchange BUILDING_COST = 400 }
+        }
+    }
+
+    vvtqol_buildingmenu_destroy_stock_exchange = {
+        
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_destroysubmenu_enabled
+            dip_tech = 19
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+        
+        allow = {
+            any_owned_province = {
+                has_building = stock_exchange
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_delete_building_type_tooltip
+            hidden_effect = {
+                every_owned_province = {
+                    limit = {
+                        has_building = stock_exchange 
+                    }
+                    remove_building = stock_exchange
+                }
+            }
+        }
+    }
+
+    vvtqol_buildingmenu_build_workshop = {
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_buildsubmenu_enabled
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {
+            any_owned_province = {
+                vvtqol_trigger_can_construct_building = { BUILDING = workshop BUILDING_COST = 100 }
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_begin_building_construction_tooltip
+            vvtqol_effect_build_building_while_can_afford = { BUILDING = workshop  BUILDING_COST = 100 }
+        }
+    }
+
+    vvtqol_buildingmenu_destroy_workshop = {
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_destroysubmenu_enabled
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+        
+        allow = {
+            any_owned_province = {
+                has_building = workshop
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_delete_building_type_tooltip
+            hidden_effect = {
+                every_owned_province = {
+                    limit = {
+                        has_building = workshop 
+                    }
+                    remove_building = workshop
+                }
+            }
+        }
+    }
+
+    vvtqol_buildingmenu_build_counting_house = {
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_buildsubmenu_enabled
+            adm_tech = 24
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {
+            any_owned_province = {
+                vvtqol_trigger_can_construct_building = { BUILDING = counting_house BUILDING_COST = 400 }
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_begin_building_construction_tooltip
+            vvtqol_effect_build_building_while_can_afford = { BUILDING = counting_house BUILDING_COST = 400 }
+        }
+    }
+
+    vvtqol_buildingmenu_destroy_counting_house = {
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_destroysubmenu_enabled
+            adm_tech = 24
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+        
+        allow = {
+            any_owned_province = {
+                has_building = counting_house
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_delete_building_type_tooltip
+            hidden_effect = {
+                every_owned_province = {
+                    limit = {
+                        has_building = counting_house 
+                    }
+                    remove_building = counting_house
+                }
+            }
+        }
+    }
+
+    vvtqol_buildingmenu_build_regimental_camp = {
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_buildsubmenu_enabled
+            mil_tech = 8
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {
+            any_owned_province = {
+                vvtqol_trigger_can_construct_building = { BUILDING = regimental_camp BUILDING_COST = 200 }
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_begin_building_construction_tooltip
+            vvtqol_effect_build_building_while_can_afford = { BUILDING = regimental_camp BUILDING_COST = 200 }
+        }
+    }
+
+    vvtqol_buildingmenu_destroy_regimental_camp = {
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_destroysubmenu_enabled
+            mil_tech = 8
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+        
+        allow = {
+            any_owned_province = {
+                has_building = regimental_camp 
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_delete_building_type_tooltip
+            hidden_effect = {
+                every_owned_province = {
+                    limit = {
+                        has_building = regimental_camp 
+                    }
+                    remove_building = regimental_camp
+                }
+            }
+        }
+    }
+
+    vvtqol_buildingmenu_build_conscription_center = {
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_buildsubmenu_enabled
+            mil_tech = 22
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {
+            any_owned_province = {
+                vvtqol_trigger_can_construct_building = { BUILDING = conscription_center BUILDING_COST = 400  }
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_begin_building_construction_tooltip
+            vvtqol_effect_build_building_while_can_afford = { BUILDING = conscription_center BUILDING_COST = 400 }
+        }
+    }
+
+    vvtqol_buildingmenu_destroy_conscription_center = {
+        
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_destroysubmenu_enabled
+            mil_tech = 22
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+        
+        allow = {
+            any_owned_province = {
+                has_building = conscription_center
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_delete_building_type_tooltip
+            hidden_effect = {
+                every_owned_province = {
+                    limit = {
+                        has_building = conscription_center 
+                    }
+                    remove_building = conscription_center
+                }
+            }
+        }
+    }
+
+    vvtqol_buildingmenu_build_barracks = {
+        
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_buildsubmenu_enabled
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {
+            any_owned_province = {
+                vvtqol_trigger_can_construct_building = { BUILDING = barracks BUILDING_COST = 100 }
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_begin_building_construction_tooltip
+            vvtqol_effect_build_building_while_can_afford = { BUILDING = barracks BUILDING_COST = 100 }
+        }
+    }
+
+    vvtqol_buildingmenu_destroy_barracks = {
+        
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_destroysubmenu_enabled
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+        
+        allow = {
+            any_owned_province = {
+                has_building = barracks
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_delete_building_type_tooltip
+            hidden_effect = {
+                every_owned_province = {
+                    limit = {
+                        has_building = barracks
+                    }
+                    remove_building = barracks
+                }
+            }
+        }
+    }
+
+    vvtqol_buildingmenu_build_training_fields = {
+        
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_buildsubmenu_enabled
+            mil_tech = 16
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {
+            any_owned_province = {
+                vvtqol_trigger_can_construct_building = { BUILDING = training_fields BUILDING_COST = 300 }
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_begin_building_construction_tooltip
+            vvtqol_effect_build_building_while_can_afford = { BUILDING = training_fields BUILDING_COST = 300 }
+        }
+    }
+
+    vvtqol_buildingmenu_destroy_training_fields = {
+        
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_destroysubmenu_enabled
+            mil_tech = 16
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+        
+        allow = {
+            any_owned_province = {
+                has_building = training_fields
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_delete_building_type_tooltip
+            hidden_effect = {
+                every_owned_province = {
+                    limit = {
+                        has_building = training_fields 
+                    }
+                    remove_building = training_fields
+                }
+            }
+        }
+    }
+
+    vvtqol_buildingmenu_build_dock = {
+        
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_buildsubmenu_enabled
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {
+            any_owned_province = {
+                vvtqol_trigger_can_construct_building = { BUILDING = dock BUILDING_COST = 100 }
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_begin_building_construction_tooltip
+            vvtqol_effect_build_building_while_can_afford = { BUILDING = dock BUILDING_COST = 100 }
+        }
+    }
+
+    vvtqol_buildingmenu_destroy_dock = {
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_destroysubmenu_enabled
+        }   
+
+        ai_will_do = {
+            factor = 0
+        }
+        
+        allow = {
+            any_owned_province = {
+                has_building = dock
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_delete_building_type_tooltip
+            hidden_effect = {
+                every_owned_province = {
+                    limit = {
+                        has_building = dock 
+                    }
+                    remove_building = dock
+                }
+            }
+        }
+    }
+
+    vvtqol_buildingmenu_build_drydock = {
+        
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_buildsubmenu_enabled
+            dip_tech = 19
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {
+            any_owned_province = {
+                vvtqol_trigger_can_construct_building = { BUILDING = drydock BUILDING_COST = 300 }
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_begin_building_construction_tooltip
+            vvtqol_effect_build_building_while_can_afford = { BUILDING = drydock BUILDING_COST = 300 }
+        }
+    }
+
+    vvtqol_buildingmenu_destroy_drydock = {
+        
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_destroysubmenu_enabled
+            dip_tech = 19
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+        
+        allow = {
+            any_owned_province = {
+                has_building = drydock
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_delete_building_type_tooltip
+            hidden_effect = {
+                every_owned_province = {
+                    limit = {
+                        has_building = drydock 
+                    }
+                    remove_building = drydock
+                }
+            }
+        }
+    }
+
+    vvtqol_buildingmenu_build_shipyard = {
+        
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_buildsubmenu_enabled
+            dip_tech = 8
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {
+            any_owned_province = {
+                vvtqol_trigger_can_construct_building = { BUILDING = shipyard BUILDING_COST = 100 }
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_begin_building_construction_tooltip
+            vvtqol_effect_build_building_while_can_afford = { BUILDING = shipyard BUILDING_COST = 100 }
+        }
+    }
+
+    vvtqol_buildingmenu_destroy_shipyard = {
+        
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_destroysubmenu_enabled
+            dip_tech = 8
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+        
+        allow = {
+            any_owned_province = {
+                has_building = shipyard
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_delete_building_type_tooltip
+            hidden_effect = {
+                every_owned_province = {
+                    limit = {
+                        has_building = shipyard 
+                    }
+                    remove_building = shipyard
+                }
+            }
+        }
+    }
+
+    vvtqol_buildingmenu_build_grand_shipyard = {
+        
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_buildsubmenu_enabled
+            dip_tech = 24
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {
+            any_owned_province = {
+                vvtqol_trigger_can_construct_building = { BUILDING = grand_shipyard BUILDING_COST = 300 }
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_begin_building_construction_tooltip
+            vvtqol_effect_build_building_while_can_afford = { BUILDING = grand_shipyard BUILDING_COST = 300 }
+        }
+    }
+
+    vvtqol_buildingmenu_destroy_grand_shipyard = {
+        
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_destroysubmenu_enabled
+            dip_tech = 24
+        }   
+
+        ai_will_do = {
+            factor = 0
+        }
+        
+        allow = {
+            any_owned_province = {
+                has_building = grand_shipyard
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_delete_building_type_tooltip
+            hidden_effect = {
+                every_owned_province = {
+                    limit = {
+                        has_building = grand_shipyard 
+                    }
+                    remove_building = grand_shipyard
+                }
+            }
+        }
+    }
+
+    vvtqol_buildingmenu_build_fort_15th = {
+        
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_buildsubmenu_enabled
+            mil_tech = 1
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {
+            any_owned_province = {
+                vvtqol_trigger_can_construct_building = { BUILDING = fort_15th BUILDING_COST = 200 }
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_begin_building_construction_tooltip
+            vvtqol_effect_build_building_while_can_afford = { BUILDING = fort_15th BUILDING_COST = 200 }
+        }
+    }
+
+    vvtqol_buildingmenu_destroy_fort_15th = {
+        
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_destroysubmenu_enabled
+            mil_tech = 1
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+        
+        allow = {
+            any_owned_province = {
+                has_building = fort_15th
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_delete_building_type_tooltip
+            hidden_effect = {
+                every_owned_province = {
+                    limit = {
+                        has_building = fort_15th 
+                    }
+                    remove_building = fort_15th
+                }
+            }
+        }
+    }
+
+    vvtqol_buildingmenu_build_fort_16th = {
+        
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_buildsubmenu_enabled
+            mil_tech = 16
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {
+            any_owned_province = {
+                vvtqol_trigger_can_construct_building = { BUILDING = fort_16th BUILDING_COST = 400 }
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_begin_building_construction_tooltip
+            vvtqol_effect_build_building_while_can_afford = { BUILDING = fort_16th BUILDING_COST = 400 }
+        }
+    }
+
+    vvtqol_buildingmenu_destroy_fort_16th = {
+        
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_destroysubmenu_enabled
+            mil_tech = 16
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+        
+        allow = {
+            any_owned_province = {
+                has_building = fort_16th
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_delete_building_type_tooltip
+            hidden_effect = {
+                every_owned_province = {
+                    limit = {
+                        has_building = fort_16th 
+                    }
+                    remove_building = fort_16th
+                }
+            }
+        }
+    }
+
+    vvtqol_buildingmenu_build_fort_17th = {
+        
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_buildsubmenu_enabled
+            mil_tech = 19
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {
+            any_owned_province = {
+                vvtqol_trigger_can_construct_building = { BUILDING = fort_17th BUILDING_COST = 600 }
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_begin_building_construction_tooltip
+            vvtqol_effect_build_building_while_can_afford = { BUILDING = fort_17th BUILDING_COST = 600 }
+        }
+    }
+
+    vvtqol_buildingmenu_destroy_fort_17th = {
+        
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_destroysubmenu_enabled
+            mil_tech = 16
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+        
+        allow = {
+            any_owned_province = {
+                has_building = fort_17th
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_delete_building_type_tooltip
+            hidden_effect = {
+                every_owned_province = {
+                    limit = {
+                        has_building = fort_17th 
+                    }
+                    remove_building = fort_17th
+                }
+            }
+        }
+    }
+
+    vvtqol_buildingmenu_build_fort_18th = {
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_buildsubmenu_enabled
+            mil_tech = 24
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {
+            any_owned_province = {
+                vvtqol_trigger_can_construct_building = { BUILDING = fort_18th BUILDING_COST = 800 }
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_begin_building_construction_tooltip
+            vvtqol_effect_build_building_while_can_afford = { BUILDING = fort_18th BUILDING_COST = 800 }
+        }
+    }
+
+    vvtqol_buildingmenu_destroy_fort_18th = {
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_destroysubmenu_enabled
+            mil_tech = 24
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+        
+        allow = {
+            any_owned_province = {
+                has_building = fort_18th
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_delete_building_type_tooltip
+            hidden_effect = {
+                every_owned_province = {
+                    limit = {
+                        has_building = fort_18th
+                    }
+                    remove_building = fort_18th
+                }
+            }
+        }
+    }
+
+    vvtqol_buildingmenu_build_coastal_defence = {
+        
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_buildsubmenu_enabled
+            dip_tech = 5
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {
+            any_owned_province = {
+                vvtqol_trigger_can_construct_building = { BUILDING = coastal_defence BUILDING_COST = 100 }
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_begin_building_construction_tooltip
+            vvtqol_effect_build_building_while_can_afford = { BUILDING = coastal_defence BUILDING_COST = 100 }
+        }
+    }
+
+    vvtqol_buildingmenu_destroy_coastal_defence = {
+        
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_destroysubmenu_enabled
+            dip_tech = 5
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+        
+        allow = {
+            any_owned_province = {
+                has_building = coastal_defence
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_delete_building_type_tooltip
+            hidden_effect = {
+                every_owned_province = {
+                    limit = {
+                        has_building = coastal_defence 
+                    }
+                    remove_building = coastal_defence
+                }
+            }
+        }
+    }
+
+    vvtqol_buildingmenu_build_naval_battery = {
+        
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_buildsubmenu_enabled
+            dip_tech = 12
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {
+            any_owned_province = {
+                vvtqol_trigger_can_construct_building = { BUILDING = naval_battery BUILDING_COST = 200 }
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_begin_building_construction_tooltip
+            vvtqol_effect_build_building_while_can_afford = { BUILDING = naval_battery BUILDING_COST = 200 }
+        }
+    }
+
+    vvtqol_buildingmenu_destroy_naval_battery = {
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_destroysubmenu_enabled
+            dip_tech = 12
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+        
+        allow = {
+            any_owned_province = {
+                has_building = naval_battery
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_delete_building_type_tooltip
+            hidden_effect = {
+                every_owned_province = {
+                    limit = {
+                        has_building = naval_battery 
+                    }
+                    remove_building = naval_battery
+                }
+            }
+        }
+    }
+
+    vvtqol_buildingmenu_build_ramparts = {        
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_buildsubmenu_enabled
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {
+            any_owned_province = {
+                vvtqol_trigger_can_construct_building = { BUILDING = ramparts BUILDING_COST = 500 }
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_begin_building_construction_tooltip
+            vvtqol_effect_build_building_while_can_afford = { BUILDING = ramparts BUILDING_COST = 500 }
+        }
+    }
+
+    vvtqol_buildingmenu_destroy_ramparts = {
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_destroysubmenu_enabled
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+        
+        allow = {
+            any_owned_province = {
+                has_building = ramparts
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_delete_building_type_tooltip
+            hidden_effect = {
+                every_owned_province = {
+                    limit = {
+                        has_building = ramparts 
+                    }
+                    remove_building = ramparts
+                }
+            }
+        }
+    }
+
+	vvtqol_buildingmenu_build_soldier_household = {        
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_buildsubmenu_enabled
+            adm_tech = 15
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {
+            any_owned_province = {
+                vvtqol_trigger_can_construct_building = { BUILDING = soldier_households BUILDING_COST = 500 }
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_begin_building_construction_tooltip
+            vvtqol_effect_build_building_while_can_afford = { BUILDING = soldier_households BUILDING_COST = 500 }
+        }
+    }
+
+    vvtqol_buildingmenu_destroy_soldier_household = {
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_destroysubmenu_enabled
+            adm_tech = 15
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+        
+        allow = {
+            any_owned_province = {
+                has_building = soldier_households
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_delete_building_type_tooltip
+            hidden_effect = {
+                every_owned_province = {
+                    limit = {
+                        has_building = soldier_households 
+                    }
+                    remove_building = soldier_households
+                }
+            }
+        }
+    }
+
+	vvtqol_buildingmenu_build_impressment_office = {        
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_buildsubmenu_enabled
+            dip_tech = 7
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {
+            any_owned_province = {
+                vvtqol_trigger_can_construct_building = { BUILDING = impressment_offices BUILDING_COST = 500 }
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_begin_building_construction_tooltip
+            vvtqol_effect_build_building_while_can_afford = { BUILDING = impressment_offices BUILDING_COST = 500 }
+        }
+    }
+
+    vvtqol_buildingmenu_destroy_impressment_office = {
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_destroysubmenu_enabled
+            dip_tech = 7
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+        
+        allow = {
+            any_owned_province = {
+                has_building = impressment_offices
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_delete_building_type_tooltip
+            hidden_effect = {
+                every_owned_province = {
+                    limit = {
+                        has_building = impressment_offices 
+                    }
+                    remove_building = impressment_offices
+                }
+            }
+        }
+    }
+
+    vvtqol_buildingmenu_build_courthouse = {        
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_buildsubmenu_enabled
+            adm_tech = 8
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {
+            any_owned_province = {
+                vvtqol_trigger_can_construct_building = { BUILDING = courthouse BUILDING_COST = 100 }
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_begin_building_construction_tooltip
+            vvtqol_effect_build_building_while_can_afford = { BUILDING = courthouse BUILDING_COST = 100 }
+        }
+    }
+
+    vvtqol_buildingmenu_destroy_courthouse = {
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_destroysubmenu_enabled
+            adm_tech = 8
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+        
+        allow = {
+            any_owned_province = {
+                has_building = courthouse
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_delete_building_type_tooltip
+            hidden_effect = {
+                every_owned_province = {
+                    limit = {
+                        has_building = courthouse 
+                    }
+                    remove_building = courthouse
+                }
+            }
+        }
+    }
+    
+    vvtqol_buildingmenu_build_town_hall = {
+        
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_buildsubmenu_enabled
+            adm_tech = 22
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {
+            any_owned_province = {
+                vvtqol_trigger_can_construct_building = { BUILDING = town_hall BUILDING_COST = 200 }
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_begin_building_construction_tooltip
+            vvtqol_effect_build_building_while_can_afford = { BUILDING = town_hall BUILDING_COST = 200 }
+        }
+    }
+
+    vvtqol_buildingmenu_destroy_town_hall = {
+        
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_destroysubmenu_enabled
+            adm_tech = 22
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+        
+        allow = {
+            any_owned_province = {
+                has_building = town_hall
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_delete_building_type_tooltip
+            hidden_effect = {
+                every_owned_province = {
+                    limit = {
+                        has_building = town_hall 
+                    }
+                    remove_building = town_hall
+                }
+            }
+        }
+    }
+
+    vvtqol_buildingmenu_build_university = {
+        
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_buildsubmenu_enabled
+            adm_tech = 17
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {
+            any_owned_province = {
+                vvtqol_trigger_can_construct_building = { BUILDING = university BUILDING_COST = 300 }
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_begin_building_construction_tooltip
+            vvtqol_effect_build_building_while_can_afford = { BUILDING = university BUILDING_COST = 300 }
+        }
+    }
+
+    vvtqol_buildingmenu_destroy_university = {
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_destroysubmenu_enabled
+            adm_tech = 17
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+        
+        allow = {
+            any_owned_province = {
+                has_building = university
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_delete_building_type_tooltip
+            hidden_effect = {
+                every_owned_province = {
+                    limit = {
+                        has_building = university 
+                    }
+                    remove_building = university
+                }
+            }
+        }
+    }
+
+	vvtqol_buildingmenu_build_wharf = {
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_buildsubmenu_enabled
+            dip_tech = 11
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {
+            any_owned_province = {
+                vvtqol_trigger_can_construct_building = { BUILDING = wharf BUILDING_COST = 500 }
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_begin_building_construction_tooltip
+            vvtqol_effect_build_building_while_can_afford = { BUILDING = wharf BUILDING_COST = 500 }
+        }
+    }
+
+    vvtqol_buildingmenu_destroy_wharf = {
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_destroysubmenu_enabled
+            dip = 11
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+        
+        allow = {
+            any_owned_province = {
+                has_building = wharf
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_delete_building_type_tooltip
+            hidden_effect = {
+                every_owned_province = {
+                    limit = {
+                        has_building = wharf 
+                    }
+                    remove_building = wharf
+                }
+            }
+        }
+    }
+
+	vvtqol_buildingmenu_build_textile = {
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_buildsubmenu_enabled
+            adm_tech = 11
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {
+            any_owned_province = {
+                vvtqol_trigger_can_construct_building = { BUILDING = textile BUILDING_COST = 500 }
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_begin_building_construction_tooltip
+            vvtqol_effect_build_building_while_can_afford = { BUILDING = textile BUILDING_COST = 500 }
+        }
+    }
+
+    vvtqol_buildingmenu_destroy_textile = {
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_destroysubmenu_enabled
+            adm_tech = 11
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+        
+        allow = {
+            any_owned_province = {
+                has_building = textile
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_delete_building_type_tooltip
+            hidden_effect = {
+                every_owned_province = {
+                    limit = {
+                        has_building = textile 
+                    }
+                    remove_building = textile
+                }
+            }
+        }
+    }
+
+	vvtqol_buildingmenu_build_weapons = {
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_buildsubmenu_enabled
+            mil_tech = 11
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {
+            any_owned_province = {
+                vvtqol_trigger_can_construct_building = { BUILDING = weapons BUILDING_COST = 500 }
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_begin_building_construction_tooltip
+            vvtqol_effect_build_building_while_can_afford = { BUILDING = weapons BUILDING_COST = 500 }
+        }
+    }
+
+    vvtqol_buildingmenu_destroy_weapons = {
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_destroysubmenu_enabled
+            mil_tech = 11
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+        
+        allow = {
+            any_owned_province = {
+                has_building = weapons
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_delete_building_type_tooltip
+            hidden_effect = {
+                every_owned_province = {
+                    limit = {
+                        has_building = weapons 
+                    }
+                    remove_building = weapons
+                }
+            }
+        }
+    }
+
+	vvtqol_buildingmenu_build_plantations = {
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_buildsubmenu_enabled
+            adm_tech = 14
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {
+            any_owned_province = {
+                vvtqol_trigger_can_construct_building = { BUILDING = plantations BUILDING_COST = 500 }
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_begin_building_construction_tooltip
+            vvtqol_effect_build_building_while_can_afford = { BUILDING = plantations BUILDING_COST = 500 }
+        }
+    }
+
+    vvtqol_buildingmenu_destroy_plantations = {
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_destroysubmenu_enabled
+            adm_tech = 14
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+        
+        allow = {
+            any_owned_province = {
+                has_building = plantations
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_delete_building_type_tooltip
+            hidden_effect = {
+                every_owned_province = {
+                    limit = {
+                        has_building = plantations 
+                    }
+                    remove_building = plantations
+                }
+            }
+        }
+    }
+
+	vvtqol_buildingmenu_build_tradecompany = {
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_buildsubmenu_enabled
+            dip_tech = 14
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {
+            any_owned_province = {
+                vvtqol_trigger_can_construct_building = { BUILDING = tradecompany BUILDING_COST = 500 }
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_begin_building_construction_tooltip
+            vvtqol_effect_build_building_while_can_afford = { BUILDING = tradecompany BUILDING_COST = 500 }
+        }
+    }
+
+    vvtqol_buildingmenu_destroy_tradecompany = {
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_destroysubmenu_enabled
+            dip_tech = 14
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+        
+        allow = {
+            any_owned_province = {
+                has_building = tradecompany
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_delete_building_type_tooltip
+            hidden_effect = {
+                every_owned_province = {
+                    limit = {
+                        has_building = tradecompany 
+                    }
+                    remove_building = tradecompany
+                }
+            }
+        }
+    }
+
+	vvtqol_buildingmenu_build_farm_estate = {
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_buildsubmenu_enabled
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {
+            any_owned_province = {
+                vvtqol_trigger_can_construct_building = { BUILDING = farm_estate BUILDING_COST = 500 }
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_begin_building_construction_tooltip
+            vvtqol_effect_build_building_while_can_afford = { BUILDING = farm_estate BUILDING_COST = 500 }
+        }
+    }
+
+    vvtqol_buildingmenu_destroy_farm_estate = {
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_destroysubmenu_enabled
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+        
+        allow = {
+            any_owned_province = {
+                has_building = farm_estate
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_delete_building_type_tooltip
+            hidden_effect = {
+                every_owned_province = {
+                    limit = {
+                        has_building = farm_estate 
+                    }
+                    remove_building = farm_estate
+                }
+            }
+        }
+    }
+
+	vvtqol_buildingmenu_build_mills = {
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_buildsubmenu_enabled
+            adm_tech = 16
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {
+            any_owned_province = {
+                vvtqol_trigger_can_construct_building = { BUILDING = mills BUILDING_COST = 500 }
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_begin_building_construction_tooltip
+            vvtqol_effect_build_building_while_can_afford = { BUILDING = mills BUILDING_COST = 500 }
+        }
+    }
+
+    vvtqol_buildingmenu_destroy_mills = {
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_destroysubmenu_enabled
+            adm_tech = 16
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+        
+        allow = {
+            any_owned_province = {
+                has_building = mills
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_delete_building_type_tooltip
+            hidden_effect = {
+                every_owned_province = {
+                    limit = {
+                        has_building = mills 
+                    }
+                    remove_building = mills
+                }
+            }
+        }
+    }
+
+	vvtqol_buildingmenu_buildtc_local_quarter = {
+		color = { 170 4 120 }
+		potential = {
+			ai = no
+			has_country_flag = vvtqol_buildingmenu_tradecompanysubmenu_enabled
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+
+		allow = {
+			# In valid trade company region
+			any_owned_province = {
+				vvtqol_trigger_can_tc_invest = { INVESTMENT = local_quarter INVESTMENT_COST = 200 }				
+				NOT = {
+					has_trade_company_investment_in_area = {
+						investor = ROOT
+						investment = permanent_quarters
+					}
+				}
+			}
+		}
+
+		effect = {
+			custom_tooltip = vvtqol_buildingmenu_begin_building_construction_tooltip
+			vvtqol_effect_build_tcinvestment_while_can_afford = { INVESTMENT = local_quarter BETTER_INVESTMENT = permanent_quarters INVESTMENT_COST = 200 }
+		}
+	}
+
+	vvtqol_buildingmenu_buildtc_permament_quarter = {
+		color = { 170 4 120 }
+		potential = {
+			ai = no
+			has_country_flag = vvtqol_buildingmenu_tradecompanysubmenu_enabled
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+
+		allow = {
+			# In valid trade company region
+			any_owned_province = {
+				vvtqol_trigger_can_tc_invest = { INVESTMENT = permanent_quarters INVESTMENT_COST = 400 }				
+			}
+		}
+
+		effect = {
+			custom_tooltip = vvtqol_buildingmenu_begin_building_construction_tooltip
+			vvtqol_effect_build_tcinvestment_while_can_afford = { INVESTMENT = permanent_quarters BETTER_INVESTMENT = permanent_quarters INVESTMENT_COST = 400 }
+		}
+	}
+
+	vvtqol_buildingmenu_buildtc_company_warehouse = {
+		color = { 170 4 120 }
+		potential = {
+			ai = no
+			has_country_flag = vvtqol_buildingmenu_tradecompanysubmenu_enabled
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+
+		allow = {
+			# In valid trade company region
+			any_owned_province = {
+				vvtqol_trigger_can_tc_invest = { INVESTMENT = company_warehouse INVESTMENT_COST = 200 }				
+				NOT = {
+					has_trade_company_investment_in_area = {
+						investor = ROOT
+						investment = company_depot
+					}
+				}
+			}
+		}
+
+		effect = {
+			custom_tooltip = vvtqol_buildingmenu_begin_building_construction_tooltip
+			vvtqol_effect_build_tcinvestment_while_can_afford = { INVESTMENT = company_warehouse BETTER_INVESTMENT = company_depot INVESTMENT_COST = 200 }
+		}
+	}
+
+	vvtqol_buildingmenu_buildtc_company_depot = {
+		color = { 170 4 120 }
+		potential = {
+			ai = no
+			has_country_flag = vvtqol_buildingmenu_tradecompanysubmenu_enabled
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+
+		allow = {
+			# In valid trade company region
+			any_owned_province = {
+				vvtqol_trigger_can_tc_invest = { INVESTMENT = company_depot INVESTMENT_COST = 400 }				
+			}
+		}
+
+		effect = {
+			vvtqol_effect_build_tcinvestment_while_can_afford = { INVESTMENT = company_depot BETTER_INVESTMENT = company_depot INVESTMENT_COST = 400 }
+		}
+	}
+
+	vvtqol_buildingmenu_buildtc_brokers_office = {
+		color = { 170 4 120 }
+		potential = {
+			ai = no
+			has_country_flag = vvtqol_buildingmenu_tradecompanysubmenu_enabled
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+
+		allow = {
+			# In valid trade company region
+			any_owned_province = {
+				vvtqol_trigger_can_tc_invest = { INVESTMENT = brokers_office INVESTMENT_COST = 200 }				
+				NOT = {
+					has_trade_company_investment_in_area = {
+						investor = ROOT
+						investment = brokers_exchange
+					}
+				}
+			}
+		}
+
+		effect = {
+			custom_tooltip = vvtqol_buildingmenu_begin_building_construction_tooltip
+			vvtqol_effect_build_tcinvestment_while_can_afford = { INVESTMENT = brokers_office BETTER_INVESTMENT = brokers_exchange INVESTMENT_COST = 200 }
+		}
+	}
+
+	vvtqol_buildingmenu_buildtc_brokers_exchange = {
+		color = { 170 4 120 }
+		potential = {
+			ai = no
+			has_country_flag = vvtqol_buildingmenu_tradecompanysubmenu_enabled
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+
+		allow = {
+			# In valid trade company region
+			any_owned_province = {
+				vvtqol_trigger_can_tc_invest = { INVESTMENT = brokers_exchange INVESTMENT_COST = 400 }				
+			}
+		}
+
+		effect = {
+			vvtqol_effect_build_tcinvestment_while_can_afford = { INVESTMENT = brokers_exchange BETTER_INVESTMENT = brokers_exchange INVESTMENT_COST = 400 }
+		}
+	}
+
+	vvtqol_buildingmenu_buildtc_settlements = {
+		color = { 170 4 120 }
+		potential = {
+			ai = no
+			has_country_flag = vvtqol_buildingmenu_tradecompanysubmenu_enabled
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+
+		allow = {
+			# In valid trade company region
+			any_owned_province = {
+				vvtqol_trigger_can_tc_invest = { INVESTMENT = settlements INVESTMENT_COST = 200 }				
+				NOT = {
+					has_trade_company_investment_in_area = {
+						investor = ROOT
+						investment = district
+					}
+				}
+			}
+		}
+
+		effect = {
+			custom_tooltip = vvtqol_buildingmenu_begin_building_construction_tooltip
+			vvtqol_effect_build_tcinvestment_while_can_afford = { INVESTMENT = settlements BETTER_INVESTMENT = district INVESTMENT_COST = 200 }
+		}
+	}
+
+	vvtqol_buildingmenu_buildtc_district = {
+		color = { 170 4 120 }
+		potential = {
+			ai = no
+			has_country_flag = vvtqol_buildingmenu_tradecompanysubmenu_enabled
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+
+		allow = {
+			# In valid trade company region
+			any_owned_province = {
+				vvtqol_trigger_can_tc_invest = { INVESTMENT = district INVESTMENT_COST = 400 }				
+			}
+		}
+
+		effect = {
+			vvtqol_effect_build_tcinvestment_while_can_afford = { INVESTMENT = district BETTER_INVESTMENT = district  INVESTMENT_COST = 400 }
+		}
+	}
+
+	vvtqol_buildingmenu_buildtc_company_administration = {
+		color = { 170 4 120 }
+		potential = {
+			ai = no
+			has_country_flag = vvtqol_buildingmenu_tradecompanysubmenu_enabled
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+
+		allow = {
+			# In valid trade company region
+			any_owned_province = {
+				vvtqol_trigger_can_tc_invest = { INVESTMENT = company_administration INVESTMENT_COST = 200 }				
+				NOT = {
+					has_trade_company_investment_in_area = {
+						investor = ROOT
+						investment = military_administration
+					}
+				}
+			}
+		}
+
+		effect = {
+			custom_tooltip = vvtqol_buildingmenu_begin_building_construction_tooltip
+			vvtqol_effect_build_tcinvestment_while_can_afford = { INVESTMENT = company_administration BETTER_INVESTMENT = military_administration INVESTMENT_COST = 200 }
+		}
+	}
+
+	vvtqol_buildingmenu_buildtc_military_administration = {
+		color = { 170 4 120 }
+		potential = {
+			ai = no
+			has_country_flag = vvtqol_buildingmenu_tradecompanysubmenu_enabled
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+
+		allow = {
+			# In valid trade company region
+			any_owned_province = {
+				vvtqol_trigger_can_tc_invest = { INVESTMENT = military_administration INVESTMENT_COST = 400 }				
+			}
+		}
+
+		effect = {
+			vvtqol_effect_build_tcinvestment_while_can_afford = { INVESTMENT = military_administration BETTER_INVESTMENT = military_administration INVESTMENT_COST = 400 }
+		}
+	}
+
+    vvtqol_buildingmenu_build_village = {
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_buildsubmenu_enabled
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {
+            any_owned_province = {
+                vvtqol_trigger_can_construct_building = { BUILDING = village BUILDING_COST = 250 }
+                development = 6
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_begin_building_construction_tooltip
+            while = {
+                limit = {
+                    any_owned_province = {
+                        vvtqol_trigger_can_construct_building = { BUILDING = village BUILDING_COST = 250 }
+                        development = 6
+                    }
+                }
+        
+                random_owned_province = {
+                    limit = {
+                        vvtqol_trigger_can_construct_building = { BUILDING = village }
+                        development = 6
+                    }
+
+                    add_building_construction = { building = village speed = 1 cost = 1 }
+                    ROOT = {
+                        add_treasury = -250
+                    }
+                }
+            }
+        }
+    }
+
+    vvtqol_buildingmenu_destroy_village = {
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_destroysubmenu_enabled
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+        
+        allow = {
+            any_owned_province = {
+                has_building = village
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_delete_building_type_tooltip
+            hidden_effect = {
+                every_owned_province = {
+                    limit = {
+                        has_building = village 
+                    }
+                    remove_building = village
+                }
+            }
+        }
+    }
+
+    vvtqol_buildingmenu_build_town = {
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_buildsubmenu_enabled
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {
+            any_owned_province = {
+                vvtqol_trigger_can_construct_building = { BUILDING = town BUILDING_COST = 500 }
+                development = 12
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_begin_building_construction_tooltip
+            while = {
+                limit = {
+                    any_owned_province = {
+                        vvtqol_trigger_can_construct_building = { BUILDING = town BUILDING_COST = 500 }
+                        development = 12
+                    }
+                }
+        
+                random_owned_province = {
+                    limit = {
+                        vvtqol_trigger_can_construct_building = { BUILDING = town }
+                        development = 12 
+                    }
+
+                    add_building_construction = { building = town speed = 1 cost = 1 }
+                    ROOT = {
+                        add_treasury = -500
+                    }
+                }
+            }
+        }
+    }
+
+    vvtqol_buildingmenu_destroy_town = {
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_destroysubmenu_enabled
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+        
+        allow = {
+            any_owned_province = {
+                has_building = town
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_delete_building_type_tooltip
+            hidden_effect = {
+                every_owned_province = {
+                    limit = {
+                        has_building = town 
+                    }
+                    remove_building = town
+                }
+            }
+        }
+    }
+    
+    vvtqol_buildingmenu_build_city = {
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_buildsubmenu_enabled
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {
+            any_owned_province = {
+                vvtqol_trigger_can_construct_building = { BUILDING = city BUILDING_COST = 1000 }
+                development = 24
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_begin_building_construction_tooltip
+            while = {
+                limit = {
+                    any_owned_province = {
+                        vvtqol_trigger_can_construct_building = { BUILDING = city BUILDING_COST = 1000 }
+                        development = 24
+                    }
+                }
+        
+                random_owned_province = {
+                    limit = {
+                        vvtqol_trigger_can_construct_building = { BUILDING = city }
+                        development = 24
+                    }
+
+                    add_building_construction = { building = city speed = 1 cost = 1 }
+                    ROOT = {
+                        add_treasury = -1000
+                    }
+                }
+            }
+        }
+    }
+
+    vvtqol_buildingmenu_destroy_city = {
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_destroysubmenu_enabled
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+        
+        allow = {
+            any_owned_province = {
+                has_building = city
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_delete_building_type_tooltip
+            hidden_effect = {
+                every_owned_province = {
+                    limit = {
+                        has_building = city 
+                    }
+                    remove_building = city
+                }
+            }
+        }
+    }
+
+    vvtqol_buildingmenu_build_dirt_road = {
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_buildsubmenu_enabled
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {
+            any_owned_province = {
+                vvtqol_trigger_can_construct_building = { BUILDING = dirt_road BUILDING_COST = 50 }
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_begin_building_construction_tooltip
+            vvtqol_effect_build_building_while_can_afford = { BUILDING = dirt_road BUILDING_COST = 50 }
+        }
+    }
+
+    vvtqol_buildingmenu_destroy_dirt_road = {
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_destroysubmenu_enabled
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+        
+        allow = {
+            any_owned_province = {
+                has_building = dirt_road
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_delete_building_type_tooltip
+            hidden_effect = {
+                every_owned_province = {
+                    limit = {
+                        has_building = dirt_road 
+                    }
+                    remove_building = dirt_road
+                }
+            }
+        }
+    }
+
+    vvtqol_buildingmenu_build_stone_road = {
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_buildsubmenu_enabled
+            adm_tech = 12
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {
+            any_owned_province = {
+                vvtqol_trigger_can_construct_building = { BUILDING = stone_road BUILDING_COST = 100 }
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_begin_building_construction_tooltip
+            vvtqol_effect_build_building_while_can_afford = { BUILDING = stone_road BUILDING_COST = 100 }
+        }
+    }
+
+    vvtqol_buildingmenu_destroy_stone_road = {
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_destroysubmenu_enabled
+            adm_tech = 12
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+        
+        allow = {
+            any_owned_province = {
+                has_building = stone_road
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_delete_building_type_tooltip
+            hidden_effect = {
+                every_owned_province = {
+                    limit = {
+                        has_building = stone_road 
+                    }
+                    remove_building = stone_road
+                }
+            }
+        }
+    }
+
+    vvtqol_buildingmenu_build_macadam_road = {
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_buildsubmenu_enabled
+            adm_tech = 21
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {
+            any_owned_province = {
+                vvtqol_trigger_can_construct_building = { BUILDING = macadam_road BUILDING_COST = 200 }
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_begin_building_construction_tooltip
+            vvtqol_effect_build_building_while_can_afford = { BUILDING = macadam_road BUILDING_COST = 200 }
+        }
+    }
+
+    vvtqol_buildingmenu_destroy_macadam_road = {
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_destroysubmenu_enabled
+            adm_tech = 21
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+        
+        allow = {
+            any_owned_province = {
+                has_building = macadam_road
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_delete_building_type_tooltip
+            hidden_effect = {
+                every_owned_province = {
+                    limit = {
+                        has_building = macadam_road 
+                    }
+                    remove_building = macadam_road
+                }
+            }
+        }
+    }
+
+    vvtqol_buildingmenu_build_irrigation_ditch = {
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_buildsubmenu_enabled
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {
+            any_owned_province = {
+                vvtqol_trigger_can_construct_building = { BUILDING = irrigation_ditch BUILDING_COST = 50 }
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_begin_building_construction_tooltip
+            vvtqol_effect_build_building_while_can_afford = { BUILDING = irrigation_ditch BUILDING_COST = 50 }
+        }
+    }
+
+    vvtqol_buildingmenu_destroy_irrigation_ditch = {
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_destroysubmenu_enabled
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+        
+        allow = {
+            any_owned_province = {
+                has_building = irrigation_ditch
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_delete_building_type_tooltip
+            hidden_effect = {
+                every_owned_province = {
+                    limit = {
+                        has_building = irrigation_ditch  
+                    }
+                    remove_building = irrigation_ditch
+                }
+            }
+        }
+    }
+
+    vvtqol_buildingmenu_build_irrigation_canal = {
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_buildsubmenu_enabled
+            adm_tech = 9
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {
+            any_owned_province = {
+                vvtqol_trigger_can_construct_building = { BUILDING = irrigation_canal BUILDING_COST = 100 }
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_begin_building_construction_tooltip
+            vvtqol_effect_build_building_while_can_afford = { BUILDING = irrigation_canal BUILDING_COST = 100 }
+        }
+    }
+    
+    vvtqol_buildingmenu_destroy_irrigation_canal = {
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_destroysubmenu_enabled
+            adm_tech = 9
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+        
+        allow = {
+            any_owned_province = {
+                has_building = irrigation_canal
+            }
+        }
+
+        effect = {
+            custom_tooltip = vvtqol_buildingmenu_delete_building_type_tooltip
+            hidden_effect = {
+                every_owned_province = {
+                    limit = {
+                        has_building = irrigation_canal 
+                    }
+                    remove_building = irrigation_canal
+                }
+            }
+        }
+    }
+}

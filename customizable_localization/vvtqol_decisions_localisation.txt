@@ -1,0 +1,249 @@
+defined_text = {
+	name = vvtqol_get_educate_ruler_allowed
+	text = { 
+		localisation_key = vvtqol_icon_yes
+		trigger = {
+			OR = {
+				has_global_flag = vvtqol_educate_ruler_allowed
+				has_global_flag = vvtqol_singleplayer
+			}
+		}
+	}
+
+	text = {
+		localisation_key = vvtqol_icon_no
+		trigger = {
+			NOT = {
+				has_global_flag = vvtqol_educate_ruler_allowed
+            }
+		}
+	}
+}
+
+defined_text = {
+	name = vvtqol_get_instant_national_focus_allowed
+	text = { 
+		localisation_key = vvtqol_icon_yes
+		trigger = {
+            has_global_flag = vvtqol_instant_national_focus_allowed
+		}
+	}
+
+	text = {
+		localisation_key = vvtqol_icon_no
+		trigger = {
+			NOT = {
+				has_global_flag = vvtqol_instant_national_focus_allowed
+			}
+		}
+	}
+}
+
+defined_text = {
+	name = vvtqol_get_no_governing_capacity_allowed
+	text = { 
+		localisation_key = vvtqol_icon_yes
+		trigger = {
+            has_global_flag = vvtqol_no_governing_capacity_allowed
+		}
+	}
+
+	text = {
+		localisation_key = vvtqol_icon_no
+		trigger = {
+			NOT = {
+				has_global_flag = vvtqol_no_governing_capacity_allowed
+			}
+		}
+	}
+}
+
+defined_text = {
+	name = vvtqol_get_no_aggressive_expansion_allowed
+	text = { 
+		localisation_key = vvtqol_icon_yes
+		trigger = {
+            has_global_flag = vvtqol_no_aggressive_expansion_allowed
+		}
+	}
+
+	text = {
+		localisation_key = vvtqol_icon_no
+		trigger = {
+			NOT = {
+				has_global_flag = vvtqol_no_aggressive_expansion_allowed
+			}
+		}
+	}
+}
+
+defined_text = {
+	name = vvtqol_get_american_natives_deleted
+	text = { 
+		localisation_key = vvtqol_icon_yes
+		trigger = {
+			has_global_flag = vvtqol_american_natives_deleted
+		}
+	}
+
+	text = {
+		localisation_key = vvtqol_icon_no
+		trigger = {
+			NOT = {
+				has_global_flag = vvtqol_american_natives_deleted
+			}
+		}
+	}
+}
+
+defined_text = {
+	name = vvtqol_get_african_natives_deleted
+	text = { 
+		localisation_key = vvtqol_icon_yes
+		trigger = {
+			has_global_flag = vvtqol_african_natives_deleted
+		}
+	}
+
+	text = {
+		localisation_key = vvtqol_icon_no
+		trigger = {
+			NOT = {
+				has_global_flag = vvtqol_african_natives_deleted
+			}
+		}
+	}
+}
+
+defined_text = {
+	name = vvtqol_get_oceanian_natives_deleted
+	text = { 
+		localisation_key = vvtqol_icon_yes
+		trigger = {
+			has_global_flag = vvtqol_oceanian_natives_deleted
+		}
+	}
+
+	text = {
+		localisation_key = vvtqol_icon_no
+		trigger = {
+			NOT = {
+				has_global_flag = vvtqol_oceanian_natives_deleted
+			}
+		}
+	}
+}
+
+defined_text = {
+	name = vvtqol_get_kamchatkan_natives_deleted
+	text = { 
+		localisation_key = vvtqol_icon_yes
+		trigger = {
+			has_global_flag = vvtqol_kamchatkan_natives_deleted
+		}
+	}
+
+	text = {
+		localisation_key = vvtqol_icon_no
+		trigger = {
+			NOT = {
+				has_global_flag = vvtqol_kamchatkan_natives_deleted
+			}
+		}
+	}
+}
+
+defined_text = {
+	name = vvtqol_get_base_tax_allowed
+	text = { 
+		localisation_key = vvtqol_icon_yes
+		trigger = {
+			has_country_flag = vvtqol_automation_base_tax_enabled
+		}
+	}
+
+	text = {
+		localisation_key = vvtqol_icon_no
+		trigger = {
+			NOT = {
+				has_country_flag = vvtqol_automation_base_tax_enabled
+			}
+		}
+	}
+}
+
+defined_text = {
+	name = vvtqol_get_base_production_allowed
+	text = { 
+		localisation_key = vvtqol_icon_yes
+		trigger = {
+			has_country_flag = vvtqol_automation_base_production_enabled
+		}
+	}
+
+	text = {
+		localisation_key = vvtqol_icon_no
+		trigger = {
+			NOT = {
+				has_country_flag = vvtqol_automation_base_production_enabled
+			}
+		}
+	}
+}
+
+defined_text = {
+	name = vvtqol_get_base_manpower_allowed
+	text = { 
+		localisation_key = vvtqol_icon_yes
+		trigger = {
+			has_country_flag = vvtqol_automation_base_manpower_enabled
+		}
+	}
+
+	text = {
+		localisation_key = vvtqol_icon_no
+		trigger = {
+			NOT = {
+				has_country_flag = vvtqol_automation_base_manpower_enabled
+			}
+		}
+	}
+}
+
+defined_text = {
+	name = vvtqol_get_optimal_development
+	text = { 
+		localisation_key = vvtqol_events.12.optimal
+		trigger = {
+			has_country_flag = vvtqol_optimal_automatic_development_enabled
+		}
+	}
+
+	text = {
+		localisation_key = vvtqol_events.12.constrained
+		trigger = {
+			NOT = {
+				has_country_flag = vvtqol_optimal_automatic_development_enabled
+			}
+		}
+	}
+}
+
+defined_text = {
+	name = vvtqol_get_automatic_development_allowed
+	text = { 
+		localisation_key = vvtqol_icon_yes
+		trigger = {
+			has_global_flag = vvtqol_automatic_development_allowed
+		}
+	}
+
+	text = {
+		localisation_key = vvtqol_icon_no
+		trigger = {
+			NOT = {
+				has_global_flag = vvtqol_automatic_development_allowed
+			}
+		}
+	}
+}

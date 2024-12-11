@@ -1,0 +1,45 @@
+on_startup_vanilla_scripted_effects = {
+	emperor = {
+		save_global_event_target_as = Emperor
+	}
+	if = {
+		limit = {
+			has_dlc = "Mandate of Heaven"
+		}
+		if = {
+			limit = { is_emperor_of_china = yes }
+			save_global_event_target_as = EmperorOfChina
+		}
+	}
+	else = {
+		if = {
+			limit = { has_reform = celestial_empire }
+			save_global_event_target_as = EmperorOfChina
+		}
+	}
+	events = {
+		muslim_school_events.20 #Pick School
+		flavor_got.1 #Event for Gotland to select their mission tree
+		flavor_mng.42 #Event for the starting situation of the Ming 
+		#flavor_fra.15000 #Make the French Revolution happen if starting in 1789
+		flavor_mos.1 #Event regarding the Tatar Yoke
+		flavor_fra.206 # Setup the general for missions
+		flavor_geo.1 # Disaster info
+		flavor_mam.111 # Mamluks-Syria relations
+	}
+	on_startup_effect = yes
+	on_startup_dlc_cleanup_effect = yes
+	initialize_schools_effect = yes #This is only used here but is used for readability of on_action file.
+}
+
+on_adm_development_vanilla_scripted_effects = {
+	on_development_effect = { type = adm }
+}
+
+on_dip_development_vanilla_scripted_effects = {
+   	on_development_effect = { type = dip }
+}
+
+on_mil_development_vanilla_scripted_effects = {
+   	on_development_effect = { type = mil }
+}

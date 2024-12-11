@@ -1,0 +1,576 @@
+####################
+# Vivit's QOL start
+####################
+
+embassy = {
+	cost = 1000
+	time = 24
+
+	one_per_country = yes
+	indestructible = yes
+
+	ai_will_do = {
+		factor = 10
+	}
+
+	build_trigger = {
+		owner = {
+			OR = {
+				full_idea_group = diplomatic_ideas
+				full_idea_group = influence_ideas
+			}
+		}
+	}
+
+	modifier = {
+		improve_relation_modifier = 0.25
+		envoy_travel_time = -0.25
+		diplomatic_upkeep = 3
+	}
+}
+
+foreign_office = {
+	cost = 1000
+	time = 24
+
+	one_per_country = yes
+	indestructible = yes
+
+	ai_will_do = {
+		factor = 10
+	}
+
+	build_trigger = {
+		owner = {
+			OR = {
+				full_idea_group = diplomatic_ideas
+				full_idea_group = influence_ideas
+			}
+		}
+	}
+
+	modifier = {
+		improve_relation_modifier = 0.25
+		diplomatic_reputation = 3
+		unjustified_demands = -0.25
+	}
+}
+
+colonial_bureau = {
+	cost = 1000
+	time = 24
+
+	one_per_country = yes
+	indestructible = yes
+
+	ai_will_do = {
+        factor = 1
+	}
+
+	build_trigger = {
+		owner = {
+			OR = {
+				full_idea_group = exploration_ideas
+				full_idea_group = expansion_ideas
+				
+				# Russia
+                tag = RUS
+				# England
+                tag = ENG
+				# Great Britain
+                tag = GBR
+				# France
+                tag = FRA
+				# Castile
+                tag = CAS
+				# Spain
+                tag = SPA
+				# Portugal
+                tag = POR
+				# Netherlands
+                tag = NED
+			}
+		}
+	}
+
+	modifier = {
+		colonists = 1
+		global_colonial_growth = 40
+		colonist_placement_chance = 0.1
+	}
+}
+
+ministry_of_architecture = {
+	cost = 1500
+	time = 24
+
+	one_per_country = yes
+	indestructible = yes
+
+	ai_will_do = {
+		factor = 10
+	}
+
+	build_trigger = {
+		owner = {
+            OR = {
+				full_idea_group = economic_ideas
+                full_idea_group = infrastructure_ideas
+            }
+		}	
+	}
+
+	modifier = {
+		build_cost = -0.1
+		build_time = -0.1
+	}
+}
+
+ministry_of_infrastructure = {
+	cost = 1500
+	time = 24
+
+	one_per_country = yes
+	indestructible = yes
+
+	ai_will_do = {
+		factor = 10
+	}
+
+	build_trigger = {
+		owner = {
+			OR = {
+				full_idea_group = economic_ideas
+                full_idea_group = infrastructure_ideas
+			}
+		}
+	}
+
+	modifier = {
+		development_cost = -0.1
+		development_cost_modifier = -0.1
+	}
+}
+
+ministry_of_war = {
+	cost = 1500
+	time = 24
+
+	one_per_country = yes
+	indestructible = yes
+
+	ai_will_do = {
+		factor = 10
+	}
+
+	build_trigger = {
+		owner = {
+            full_idea_group = offensive_ideas
+        }
+	}
+
+	modifier = {
+		siege_ability = 0.1
+		discipline = 0.025
+		land_morale = 0.05
+		naval_morale = 0.05
+	}
+}
+
+ministry_of_defence = {
+	cost = 1500
+	time = 24
+
+	one_per_country = yes
+	indestructible = yes
+
+	ai_will_do = {
+		factor = 10
+	}
+
+	build_trigger = {
+		owner = {
+            full_idea_group = defensive_ideas
+		}
+	}
+
+	modifier = {
+		defensiveness = 0.2
+		own_territory_dice_roll_bonus = 1
+		hostile_attrition = 2
+	}
+}
+
+royal_residency = {
+	cost = 1500
+	time = 24
+
+	one_per_country = yes
+	indestructible = yes
+
+	ai_will_do = {
+		factor = 0
+	}
+
+	build_trigger = {
+		owner = {
+			OR = {
+				full_idea_group = aristocracy_ideas	
+                full_idea_group = court_ideas
+				government = monarchy
+			}
+		}
+	}
+
+	modifier = {
+		accept_vassalization_reasons = 10
+		vassal_income = 0.1
+        legitimacy = 0.1
+	}
+}
+
+central_bank = {
+    cost = 1500
+	time = 24
+
+	one_per_country = yes
+	indestructible = yes
+
+	ai_will_do = {
+		factor = 0
+	}
+
+	build_trigger = {
+		owner = {
+			OR = {
+				full_idea_group = economic_ideas
+                full_idea_group = infrastructure_ideas
+			}
+		}
+	}
+
+	modifier = {
+		inflation_action_cost = -0.25
+        inflation_reduction = 0.25
+        monthly_gold_inflation_modifier = -0.25
+        interest = -1
+    }
+}
+
+technology_institute = {
+    cost = 1500
+	time = 24
+
+	one_per_country = yes
+	indestructible = yes
+
+	ai_will_do = {
+		factor = 0
+	}
+
+	build_trigger = {
+		owner = {
+			OR = {
+				full_idea_group = innovativeness_ideas
+			}
+		}
+	}
+
+	modifier = {
+		innovativeness_gain = 0.25
+        all_power_cost = -0.05
+        global_institution_spread = 0.5
+        embracement_cost = -0.25
+    }
+}
+
+dirt_road = {
+	cost = 50
+	time = 3
+
+	indestructible = yes
+
+	ai_will_do = {
+		factor = 1
+	}
+
+	modifier = {
+		local_friendly_movement_speed = 0.2
+		local_institution_spread = 0.2
+	}
+}
+
+stone_road = {
+	cost = 100
+	time = 12
+
+	indestructible = yes
+	make_obsolete = dirt_road
+
+	ai_will_do = {
+		factor = 1
+	}
+
+	modifier = {
+        local_friendly_movement_speed = 0.2
+		local_institution_spread = 0.2
+        local_culture_conversion_time = -0.1  
+	}
+}
+
+macadam_road = {
+    cost = 200
+	time = 24
+
+	indestructible = yes
+	make_obsolete = stone_road
+
+	ai_will_do = {
+		factor = 1
+	}
+
+	modifier = {
+        local_friendly_movement_speed = 0.4
+		local_institution_spread = 0.3
+        local_culture_conversion_time = -0.2  
+	}
+}
+
+irrigation_ditch = {
+	cost = 50
+	time = 6
+
+	indestructible = yes
+	
+	ai_will_do = {
+		factor = 1
+	}
+
+	build_trigger = {
+		ROOT = {
+			OR = {
+				has_terrain = marsh
+				has_terrain = farmlands
+				has_terrain = grasslands
+				has_terrain = drylands
+				has_terrain = savannah
+			}
+		}
+	}
+
+	modifier = {
+		trade_goods_size = 0.25
+        local_prosperity_growth = 0.05
+	}
+}
+
+irrigation_canal = {
+	cost = 100
+	time = 12
+
+	indestructible = yes
+	make_obsolete = irrigation_ditch
+
+	ai_will_do = {
+		factor = 1
+	}
+	
+	build_trigger = {
+		ROOT = {
+			OR = {
+				has_terrain = marsh
+				has_terrain = farmlands
+				has_terrain = grasslands
+				has_terrain = drylands
+				has_terrain = savannah
+			}
+		}
+	}
+
+	modifier = {
+		trade_goods_size = 0.5
+        local_prosperity_growth = 0.1
+	}
+}
+
+village = {
+	cost = 250
+	time = 9
+
+	indestructible = yes
+	
+	ai_will_do = {
+		factor = 1
+	}
+
+	build_trigger = {
+        development = 6
+	}
+
+    on_built = {
+        add_development_from_building = {
+            building = village
+            type = tax
+            value = 1
+        }
+        add_development_from_building = {
+            building = village
+            type = production
+            value = 1
+        }
+        add_development_from_building = {
+            building = village
+            type = manpower
+            value = 1
+        }
+	}
+
+    on_destroyed = {
+        remove_development_from_building = {
+            building = village
+            type = tax
+            value = 1
+        }
+        remove_development_from_building = {
+            building = village
+            type = production
+            value = 1
+        }
+        remove_development_from_building = {
+            building = village
+            type = manpower
+            value = 1
+        }
+    }
+
+	modifier = {
+        supply_limit_modifier = 0.1
+        local_manpower_modifier = 0.1
+        local_tax_modifier = 0.1
+        local_production_efficiency = 0.1
+	}
+}
+
+town = {
+	cost = 500
+	time = 12
+
+	indestructible = yes
+	make_obsolete = village
+
+	ai_will_do = {
+		factor = 1
+	}
+
+	build_trigger = {
+        development = 12
+	}
+
+	on_built = {
+		add_development_from_building = {
+            building = town
+            type = tax
+            value = 2
+        }
+        add_development_from_building = {
+            building = town
+            type = production
+            value = 2
+        }
+        add_development_from_building = {
+            building = town
+            type = manpower
+            value = 2
+        }
+	}
+
+    on_destroyed = {
+        remove_development_from_building = {
+            building = town
+            type = tax
+            value = 2
+        }
+        remove_development_from_building = {
+            building = town
+            type = production
+            value = 2
+        }
+        remove_development_from_building = {
+            building = town
+            type = manpower
+            value = 2
+        }
+    }
+
+	modifier = {
+        supply_limit_modifier = 0.2
+        local_manpower_modifier = 0.2
+        local_tax_modifier = 0.2
+        local_production_efficiency = 0.2
+	}
+}
+
+city = {
+	cost = 1000
+	time = 12
+
+	indestructible = yes
+	make_obsolete = town
+
+	ai_will_do = {
+		factor = 1
+	}
+
+	build_trigger = {
+        development = 24
+	}
+
+	on_built = {
+        add_development_from_building = {
+            building = city
+            type = tax
+            value = 3
+        }
+        add_development_from_building = {
+            building = city
+            type = production
+            value = 3
+        }
+        add_development_from_building = {
+            building = city
+            type = manpower
+            value = 3
+        }
+	}
+
+    on_destroyed = {
+        remove_development_from_building = {
+            building = city
+            type = tax
+            value = 3
+        }
+        remove_development_from_building = {
+            building = city
+            type = production
+            value = 3
+        }
+        remove_development_from_building = {
+            building = city
+            type = manpower
+            value = 3
+        }
+    }
+
+	modifier = {
+		supply_limit_modifier = 0.4
+        local_manpower_modifier = 0.4
+        local_tax_modifier = 0.4
+        local_production_efficiency = 0.4
+        allowed_num_of_buildings = 1
+        allowed_num_of_manufactories = 1
+	}
+}
+
+####################
+# Vivit's QOL end
+####################

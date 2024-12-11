@@ -1,0 +1,1119 @@
+namespace = vvtqol_events
+
+# Reminder to educate ruler
+country_event = {
+    id = vvtqol_events.0
+    title = vvtqol_events.0.t
+    desc = vvtqol_events.0.d
+    picture = BURGHER_ESTATE_eventPicture
+    is_triggered_only = no
+
+    trigger = {
+        has_country_flag = vvtqol_educate_ruler_reminder_enabled
+        NOT = { has_country_modifier = vvtqol_ruler_recently_educated }
+        has_regency = no
+    }
+
+    # Stop reminding
+    option = {
+        name = vvtqol_events.stop_reminding
+
+        hidden_effect = {
+            clr_country_flag = vvtqol_educate_ruler_reminder_enabled
+        }
+    }
+
+    # Not now
+    option = {
+        name = vvtqol_events.remind_later
+    }
+
+    # Educate ruler
+    option = {
+        name = vvtqol_events.1.t
+
+        country_event = {
+            id = vvtqol_events.1
+            days = 0
+        }
+    }
+}
+
+# Main educate ruler event
+country_event = {
+    id = vvtqol_events.1
+    title = vvtqol_events.1.t
+    desc = vvtqol_events.1.d
+    picture = BURGHER_ESTATE_eventPicture
+    is_triggered_only = yes
+
+    # Close
+    option = {
+        name = vvtqol_events.close
+    }
+
+    # General ruler education: increase mana points
+    option = {
+        name = vvtqol_events.1.general_ruler_education
+         
+        trigger = {
+            ai = no
+            NOT = {
+                AND = {
+                    adm = 6
+                    dip = 6
+                    mil = 6
+                }
+            }
+        }
+
+        country_event = {
+            id = vvtqol_events.2
+            days = 0
+        }
+    }
+
+    # Court education
+    # option = {
+    #     name = vvtqol_events.1.court_education
+    #     trigger = {
+    #         ai = no
+    #     }
+    #     country_event = {
+    #         id = vvtqol_events.3
+    #         days = 0
+    #     }
+    # }
+
+    # Realm administration
+    option = {
+        name = vvtqol_events.1.realm_administration
+
+        trigger = {
+            ai = no
+            adm = 6
+        }
+
+        country_event = {
+            id = vvtqol_events.4
+            days = 0
+        }
+    }
+
+    # Diplomatic education
+    option = {
+        name = vvtqol_events.1.diplomatic_education
+
+        trigger = {
+            ai = no
+            dip = 6
+        }
+
+        country_event = {
+            id = vvtqol_events.5
+            days = 0
+        }
+    }
+
+    # Military education
+    option = {
+        name = vvtqol_events.1.military_education
+
+        trigger = {
+            ai = no
+            mil = 6
+        }
+
+        country_event = {
+            id = vvtqol_events.6
+            days = 0
+        }
+    }
+}
+
+# General ruler education: increase mana points
+country_event = {
+    id = vvtqol_events.2
+    title = vvtqol_events.2.t
+    desc = vvtqol_events.2.d
+    is_triggered_only = yes
+    picture = BURGHER_ESTATE_eventPicture
+
+    # Close
+    option = {
+        name = vvtqol_events.close
+    }
+
+    # Back
+    option = {
+        name = vvtqol_events.back
+        country_event = {
+            id = vvtqol_events.1
+            days = 0
+        }
+    }
+
+    # Administrative
+    option = {
+        name = vvtqol_events.2.adm
+        
+        trigger = {
+            NOT = {
+                adm = 6
+            }
+        }
+
+        if = { limit = { adm = 5 } add_treasury = -30 } 
+        else_if = { limit = { adm = 4 } add_treasury = -25 } 
+        else_if = { limit = { adm = 3 } add_treasury = -20 } 
+        else_if = { limit = { adm = 2 } add_treasury = -15 } 
+        else_if = { limit = { adm = 1 } add_treasury = -10 } 
+        else { add_treasury = -5  }
+
+        change_adm = 1
+
+        add_country_modifier = {
+            name = vvtqol_ruler_recently_educated
+            duration = 365
+        }
+    }
+
+    # Diplomatic
+    option = {
+        name = vvtqol_events.2.dip
+
+        trigger = {
+            NOT = {
+                dip = 6
+            }
+        }
+
+        if = { limit = { dip = 5 } add_treasury = -30 } 
+        else_if = { limit = { dip = 4 } add_treasury = -25 } 
+        else_if = { limit = { dip = 3 } add_treasury = -20 } 
+        else_if = { limit = { dip = 2 } add_treasury = -15 } 
+        else_if = { limit = { dip = 1 } add_treasury = -10 } 
+        else { add_treasury = -5  }
+        
+        change_dip = 1
+
+        add_country_modifier = {
+            name = vvtqol_ruler_recently_educated
+            duration = 365
+        }
+    }
+
+    # Military
+    option = {
+        name = vvtqol_events.2.mil
+    
+        trigger = {
+            NOT = {
+                mil = 6
+            }
+        }
+
+        if = { limit = { mil = 5 } add_treasury = -30 } 
+        else_if = { limit = {mil = 4 } add_treasury = -25 } 
+        else_if = { limit = {mil = 3 } add_treasury = -20 } 
+        else_if = { limit = {mil = 2 } add_treasury = -15 } 
+        else_if = { limit = {mil = 1 } add_treasury = -10 } 
+        else { add_treasury = -5  }
+
+        change_mil = 1
+
+        add_country_modifier = {
+            name = vvtqol_ruler_recently_educated
+            duration = 365
+        }
+    }
+}
+
+# Courtly education
+country_event = {
+    id = vvtqol_events.3
+    title = vvtqol_events.3.t
+    desc = vvtqol_events.3.d
+    is_triggered_only = yes
+    picture = SEJM_eventPicture
+
+    # Close
+    option = {
+        name = vvtqol_events.close
+    }
+
+    # Back
+    option = {
+        name = vvtqol_events.back
+        country_event = {
+            id = vvtqol_events.1
+            days = 0
+        }
+    }
+}
+
+# Administrative education
+country_event = {
+    id = vvtqol_events.4
+    title = vvtqol_events.4.t
+    desc = vvtqol_events.4.d
+    is_triggered_only = yes
+    picture = SEJM_eventPicture
+
+    # Close
+    option = {
+        name = vvtqol_events.close
+    }
+
+    # Back
+    option = {
+        name = vvtqol_events.back
+        country_event = {
+            id = vvtqol_events.1
+            days = 0
+        }
+    }
+
+    option = {
+        name = vvtqol_events.4.investment_strategies
+
+        trigger = {
+            NOT = {
+                has_ruler_modifier = vvtqol_investment_strategies
+            }
+        }
+
+        add_ruler_modifier = {
+            name = vvtqol_investment_strategies
+            duration = -1
+        }
+
+        add_years_of_income = -0.1
+        add_adm_power = -10
+
+        add_country_modifier = {
+            name = vvtqol_ruler_recently_educated
+            duration = 365
+        }
+    }
+
+    option = {
+        name = vvtqol_events.4.efficient_budgeting
+
+        trigger = {
+            NOT = {
+                has_ruler_modifier = vvtqol_efficient_budgeting
+            }
+        }
+
+        add_ruler_modifier = {
+            name = vvtqol_efficient_budgeting
+            duration = -1
+        }
+
+        add_years_of_income = -0.1
+        add_adm_power = -10
+
+        add_country_modifier = {
+            name = vvtqol_ruler_recently_educated
+            duration = 365
+        }
+    }
+
+    option = {
+        name = vvtqol_events.4.monetary_policy
+
+        trigger = {
+            NOT = {
+                has_ruler_modifier = vvtqol_responsible_monetary_policy
+            }
+        }
+
+        add_ruler_modifier = {
+            name = vvtqol_responsible_monetary_policy
+            duration = -1
+        }
+
+        add_years_of_income = -0.1
+        add_adm_power = -10
+
+        add_country_modifier = {
+            name = vvtqol_ruler_recently_educated
+            duration = 365
+        }
+    }
+    
+    option = {
+        name = vvtqol_events.4.science_patronage
+
+        trigger = {
+            NOT = {
+                has_ruler_modifier = vvtqol_patronage_science
+            }
+        }
+
+        add_ruler_modifier = {
+            name = vvtqol_patronage_science
+            duration = -1
+        }
+
+        add_years_of_income = -0.1
+        add_adm_power = -10
+
+        add_country_modifier = {
+            name = vvtqol_ruler_recently_educated
+            duration = 365
+        }
+    }
+
+    option = {
+        name = vvtqol_events.4.culture_patronage
+
+        trigger = {
+            NOT = {
+                has_ruler_modifier = vvtqol_patronage_culture
+            }
+        }
+
+        add_ruler_modifier = {
+            name = vvtqol_patronage_culture
+            duration = -1
+        }
+
+        add_years_of_income = -0.1
+        add_adm_power = -10
+
+        add_country_modifier = {
+            name = vvtqol_ruler_recently_educated
+            duration = 365
+        }
+    }
+
+    option = {
+        name = vvtqol_events.4.tolerant_reign
+
+        trigger = {
+            NOT = {
+                has_ruler_modifier = vvtqol_intolerant_reign
+                has_ruler_modifier = vvtqol_tolerant_reign
+            }
+        }
+
+        add_ruler_modifier = {
+            name = vvtqol_tolerant_reign
+            duration = -1
+        }
+
+        add_years_of_income = -0.1
+        add_adm_power = -10
+        
+        add_country_modifier = {
+            name = vvtqol_ruler_recently_educated
+            duration = 365
+        }
+    }
+
+    option = {
+        name = vvtqol_events.4.intolerant_reign
+
+        trigger = {
+            NOT = {
+                has_ruler_modifier = vvtqol_intolerant_reign
+                has_ruler_modifier = vvtqol_tolerant_reign
+            }
+        }
+
+        add_ruler_modifier = {
+            name = vvtqol_intolerant_reign
+            duration = -1
+        }
+
+        add_years_of_income = -0.1
+        add_adm_power = -10
+        
+        add_country_modifier = {
+            name = vvtqol_ruler_recently_educated
+            duration = 365
+        }
+    }
+
+    option = {
+        name = vvtqol_events.4.regional_administration
+
+        trigger = {
+            NOT = {
+                has_ruler_modifier = vvtqol_regional_administration
+            }
+        }
+
+        add_ruler_modifier = {
+            name = vvtqol_regional_administration
+            duration = -1
+        }
+
+        add_years_of_income = -0.1
+        add_adm_power = -10
+
+        add_country_modifier = {
+            name = vvtqol_ruler_recently_educated
+            duration = 365
+        }
+    }
+
+    option = {
+        name = vvtqol_events.4.subject_integration
+
+        trigger = {
+            NOT = {
+                has_ruler_modifier = vvtqol_subject_integration
+            }
+        }
+
+        add_ruler_modifier = {
+            name = vvtqol_subject_integration
+            duration = -1
+        }
+
+        add_years_of_income = -0.1
+        add_adm_power = -10
+        
+        add_country_modifier = {
+            name = vvtqol_ruler_recently_educated
+            duration = 365
+        }
+    }
+
+    option = {
+        name = vvtqol_events.4.decentralised_rule
+
+        trigger = {
+            NOT = {
+                has_ruler_modifier = vvtqol_decentralised_rule
+                has_ruler_modifier = vvtqol_centralised_rule
+            }
+        }
+
+        add_ruler_modifier = {
+            name = vvtqol_decentralised_rule
+            duration = -1
+        }
+
+        add_years_of_income = -0.1
+        add_adm_power = -10
+
+        add_country_modifier = {
+            name = vvtqol_ruler_recently_educated
+            duration = 365
+        }
+    }
+
+    option = {
+        name = vvtqol_events.4.centralised_rule
+
+        trigger = {
+            NOT = {
+                has_ruler_modifier = vvtqol_decentralised_rule
+                has_ruler_modifier = vvtqol_centralised_rule
+            }
+        }
+
+        add_ruler_modifier = {
+            name = vvtqol_centralised_rule
+            duration = -1
+        }
+
+        add_years_of_income = -0.1
+        add_adm_power = -10
+
+        add_country_modifier = {
+            name = vvtqol_ruler_recently_educated
+            duration = 365
+        }
+    }
+}
+
+# Diplomatic education
+country_event = {
+    id = vvtqol_events.5
+    title = vvtqol_events.5.t
+    desc = vvtqol_events.5.d
+    is_triggered_only = yes
+    picture = SEJM_eventPicture
+
+    # Close
+    option = {
+        name = vvtqol_events.close
+    }
+
+    # Back
+    option = {
+        name = vvtqol_events.back
+        country_event = {
+            id = vvtqol_events.1
+            days = 0
+        }
+    }
+
+    option = {
+        name = vvtqol_events.5.trustworthy_reputation
+
+        trigger = {
+            NOT = {
+                has_ruler_modifier = vvtqol_trustworthy_reputation
+            }
+        }
+        
+        add_ruler_modifier = {
+            name = vvtqol_trustworthy_reputation
+            duration = -1
+        }
+
+        add_years_of_income = -0.1
+        add_dip_power = -10
+
+        add_country_modifier = {
+            name = vvtqol_ruler_recently_educated
+            duration = 365
+        }
+    }
+
+    option = {
+        name = vvtqol_events.5.diplomatic_corps
+
+        trigger = {
+            NOT = {
+                has_ruler_modifier = vvtqol_diplomatic_corps
+            }
+        }
+
+        add_ruler_modifier = {
+            name = vvtqol_diplomatic_corps
+            duration = -1
+        }
+
+        add_years_of_income = -0.1
+        add_dip_power = -10
+
+        add_country_modifier = {
+            name = vvtqol_ruler_recently_educated
+            duration = 365
+        }
+    }
+
+    option = {
+        name = vvtqol_events.5.client_state_policy
+
+        trigger = {
+            NOT = {
+                has_ruler_modifier = vvtqol_client_state_policy
+            }
+        }
+
+        add_ruler_modifier = {
+            name = vvtqol_client_state_policy
+            duration = -1
+        }
+
+        add_years_of_income = -0.1
+        add_dip_power = -10
+
+        add_country_modifier = {
+            name = vvtqol_ruler_recently_educated
+            duration = 365
+        }
+    }
+
+    option = {
+        name = vvtqol_events.5.strong_emperorship
+
+        trigger = {
+            NOT = {
+                has_ruler_modifier = vvtqol_strong_emperorship
+            }
+        }
+
+        add_ruler_modifier = {
+            name = vvtqol_strong_emperorship
+            duration = -1
+        }
+
+        add_years_of_income = -0.1
+        add_dip_power = -10
+
+        add_country_modifier = {
+            name = vvtqol_ruler_recently_educated
+            duration = 365
+        }
+    }
+
+    option = {
+        name = vvtqol_events.5.justified_conquest
+
+        trigger = {
+            NOT = {
+                has_ruler_modifier = vvtqol_justified_conquest
+            }
+        }
+
+        add_ruler_modifier = {
+            name = vvtqol_justified_conquest
+            duration = -1
+        }
+
+        add_years_of_income = -0.1
+        add_dip_power = -10
+
+        add_country_modifier = {
+            name = vvtqol_ruler_recently_educated
+            duration = 365
+        }
+    }
+
+    option = {
+        name = vvtqol_events.5.religious_discrimination
+
+        trigger = {
+            NOT = {
+                has_ruler_modifier = vvtqol_religious_discrimination
+            }
+        }
+
+        add_ruler_modifier = {
+            name = vvtqol_religious_discrimination
+            duration = -1
+        }
+
+        add_years_of_income = -0.1
+        add_dip_power = -10
+
+        add_country_modifier = {
+            name = vvtqol_ruler_recently_educated
+            duration = 365
+        }
+    }
+
+    option = {
+        name = vvtqol_events.5.claim_fabrication
+
+        trigger = {
+            NOT = {
+                has_ruler_modifier = vvtqol_claim_fabrication
+            }
+        }
+
+        add_ruler_modifier = {
+            name = vvtqol_claim_fabrication
+            duration = -1
+        }
+
+        add_years_of_income = -0.1
+        add_dip_power = -10
+
+        add_country_modifier = {
+            name = vvtqol_ruler_recently_educated
+            duration = 365
+        }
+    }
+
+    option = {
+        name = vvtqol_events.5.spy_agency
+
+        trigger = {
+            NOT = {
+                has_ruler_modifier = vvtqol_spy_agency
+            }
+        }
+
+        add_ruler_modifier = {
+            name = vvtqol_spy_agency
+            duration = -1
+        }
+
+        add_years_of_income = -0.1
+        add_dip_power = -10
+
+        add_country_modifier = {
+            name = vvtqol_ruler_recently_educated
+            duration = 365
+        }
+    }
+
+    option = {
+        name = vvtqol_events.5.colonial_empire
+
+        trigger = {
+            OR = {
+                full_idea_group = exploration_ideas
+                full_idea_group = expansion_ideas
+            }
+
+            NOT = {
+                has_ruler_modifier = vvtqol_colonial_empire
+            }
+        }
+
+        add_ruler_modifier = {
+            name = vvtqol_colonial_empire
+            duration = -1
+        }
+
+        add_years_of_income = -0.1
+        add_dip_power = -10
+
+        add_country_modifier = {
+            name = vvtqol_ruler_recently_educated
+            duration = 365
+        }
+    }
+
+    option = {
+        name = vvtqol_events.5.colonial_expansion
+
+        trigger = {
+            OR = {
+                full_idea_group = exploration_ideas
+                full_idea_group = expansion_ideas
+            }
+            
+            NOT = {
+                has_ruler_modifier = vvtqol_colonial_expansion
+            }
+        }
+
+        add_ruler_modifier = {
+            name = vvtqol_colonial_expansion
+            duration = -1
+        }
+
+        add_years_of_income = -0.1
+        add_dip_power = -10
+
+        add_country_modifier = {
+            name = vvtqol_ruler_recently_educated
+            duration = 365
+        }
+    }
+}
+
+# Military education
+country_event = {
+    id = vvtqol_events.6
+    title = vvtqol_events.6.t
+    desc = vvtqol_events.6.d
+    is_triggered_only = yes
+    picture = SEJM_eventPicture
+
+    # Close
+    option = {
+        name = vvtqol_events.close
+    }
+
+    # Back
+    option = {
+        name = vvtqol_events.back
+        country_event = {
+            id = vvtqol_events.1
+            days = 0
+        }
+    }
+
+    option = {
+        name = vvtqol_events.6.ruthless_discipline
+
+        trigger = {
+            NOT = {
+                has_ruler_modifier = vvtqol_ruthless_discipline
+            }
+        }
+
+        add_ruler_modifier = {
+            name = vvtqol_ruthless_discipline
+            duration = -1
+        }
+
+        add_years_of_income = -0.1
+        add_mil_power = -10
+
+        add_country_modifier = {
+            name = vvtqol_ruler_recently_educated
+            duration = 365
+        }
+    }
+
+    option = {
+        name = vvtqol_events.6.general_staff
+
+        trigger = {
+            NOT = {
+                has_ruler_modifier = vvtqol_general_staff
+            }
+        }
+
+        add_ruler_modifier = {
+            name = vvtqol_general_staff
+            duration = -1
+        }
+
+        add_years_of_income = -0.1
+        add_mil_power = -10
+
+        add_country_modifier = {
+            name = vvtqol_ruler_recently_educated
+            duration = 365
+        }
+    }
+
+    option = {
+        name = vvtqol_events.6.dedicated_officers
+
+        trigger = {
+            NOT = {
+                has_ruler_modifier = vvtqol_dedicated_officers
+            }
+        }
+
+        add_ruler_modifier = {
+            name = vvtqol_dedicated_officers
+            duration = -1
+        }
+
+        add_years_of_income = -0.1
+        add_mil_power = -10
+
+        add_country_modifier = {
+            name = vvtqol_ruler_recently_educated
+            duration = 365
+        }
+    }
+
+    option = {
+        name = vvtqol_events.6.old_traditions
+
+        trigger = {
+            NOT = {
+                has_ruler_modifier = vvtqol_old_traditions
+            }
+        }
+
+        add_ruler_modifier = {
+            name = vvtqol_old_traditions
+            duration = -1
+        }
+
+        add_years_of_income = -0.1
+        add_mil_power = -10
+
+        add_country_modifier = {
+            name = vvtqol_ruler_recently_educated
+            duration = 365
+        }
+    }
+
+    option = {
+        name = vvtqol_events.6.trained_infantry
+
+        trigger = {
+            NOT = {
+                has_ruler_modifier = vvtqol_trained_infantry
+            }
+        }
+
+        add_ruler_modifier = {
+            name = vvtqol_trained_infantry
+            duration = -1
+        }
+
+        add_years_of_income = -0.1
+        add_mil_power = -10
+
+        add_country_modifier = {
+            name = vvtqol_ruler_recently_educated
+            duration = 365
+        }
+    }
+
+    option = {
+        name = vvtqol_events.6.trained_cavalry
+
+        trigger = {
+            NOT = {
+                has_ruler_modifier = vvtqol_trained_cavalry
+            }
+        }
+
+        add_ruler_modifier = {
+            name = vvtqol_trained_cavalry
+            duration = -1
+        }
+
+        add_years_of_income = -0.1
+        add_mil_power = -10
+
+        add_country_modifier = {
+            name = vvtqol_ruler_recently_educated
+            duration = 365
+        }
+    }
+
+    option = {
+        name = vvtqol_events.6.trained_artillery
+
+        trigger = {
+            NOT = {
+                has_ruler_modifier = vvtqol_trained_artillery_crews
+            }
+        }
+
+        add_ruler_modifier = {
+            name = vvtqol_trained_artillery_crews
+            duration = -1
+        }
+
+        add_years_of_income = -0.1
+        add_mil_power = -10
+
+        add_country_modifier = {
+            name = vvtqol_ruler_recently_educated
+            duration = 365
+        }
+    }
+
+    option = {
+        name = vvtqol_events.6.mobile_army
+
+        trigger = {
+            NOT = {
+                has_ruler_modifier = vvtqol_mobile_army
+            }
+        }
+
+        add_ruler_modifier = {
+            name = vvtqol_mobile_army
+            duration = -1
+        }
+
+        add_years_of_income = -0.1
+        add_mil_power = -10
+
+        add_country_modifier = {
+            name = vvtqol_ruler_recently_educated
+            duration = 365
+        }
+    }
+
+    option = {
+        name = vvtqol_events.6.special_regiments
+
+        trigger = {
+            NOT = {
+                has_ruler_modifier = vvtqol_introduce_special_regiments
+            }
+        }
+
+        add_ruler_modifier = {
+            name = vvtqol_introduce_special_regiments
+            duration = -1
+        }
+
+        add_years_of_income = -0.1
+        add_mil_power = -10
+
+        add_country_modifier = {
+            name = vvtqol_ruler_recently_educated
+            duration = 365
+        }
+    }
+
+    option = {
+        name = vvtqol_events.6.fortification_effort
+
+        trigger = {
+            NOT = {
+                has_ruler_modifier = vvtqol_fortification_effort
+            }
+        }
+
+        add_ruler_modifier = {
+            name = vvtqol_fortification_effort
+            duration = -1
+        }
+
+        add_years_of_income = -0.1
+        add_mil_power = -10
+
+        add_country_modifier = {
+            name = vvtqol_ruler_recently_educated
+            duration = 365
+        }
+    }
+
+    option = {
+        name = vvtqol_events.6.country_is_a_fortress
+
+        trigger = {
+            NOT = {
+                has_ruler_modifier = vvtqol_country_is_a_fortress
+            }
+        }
+
+        add_ruler_modifier = {
+            name = vvtqol_country_is_a_fortress
+            duration = -1
+        }
+
+        add_years_of_income = -0.1
+        add_mil_power = -10
+
+        add_country_modifier = {
+            name = vvtqol_ruler_recently_educated
+            duration = 365
+        }
+    }
+
+    option = {
+        name = vvtqol_events.6.prepared_for_war
+
+        trigger = {
+            NOT = {
+                has_ruler_modifier = vvtqol_prepared_for_war
+            }
+        }
+
+        add_ruler_modifier = {
+            name = vvtqol_prepared_for_war
+            duration = -1
+        }
+
+        add_years_of_income = -0.1
+        add_mil_power = -10
+
+        add_country_modifier = {
+            name = vvtqol_ruler_recently_educated
+            duration = 365
+        }
+    }
+
+    option = {
+        name = vvtqol_events.6.temporary_army
+
+        trigger = {
+            NOT = {
+                has_ruler_modifier = vvtqol_temporary_army
+            }
+        }
+
+        add_ruler_modifier = {
+            name = vvtqol_temporary_army
+            duration = -1
+        }
+
+        add_years_of_income = -0.1
+        add_mil_power = -10
+
+        add_country_modifier = {
+            name = vvtqol_ruler_recently_educated
+            duration = 365
+        }
+    }
+
+}

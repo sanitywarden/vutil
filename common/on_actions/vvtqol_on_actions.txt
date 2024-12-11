@@ -1,0 +1,271 @@
+on_startup = {
+    on_startup_vanilla_scripted_effects = yes
+
+    # Set development powerpoints requirement
+    every_country = {
+        if = {
+			limit = {
+				check_variable = {
+					which = vvtqol_powerpoints_requirement
+					value = 1
+				}
+			}
+		}
+		else = {
+			set_variable = {
+				which = vvtqol_powerpoints_requirement
+				value = 900
+			}
+		}
+    }  
+
+    # Set development target
+    every_country = {
+        if = {
+			limit = {
+				check_variable = {
+					which = vvtqol_development_target
+					value = 1
+				}
+			}
+		}
+		else = {
+			set_variable = {
+				which = vvtqol_development_target
+				value = 30
+			}
+		}
+    }  
+
+	# Development click counter variables setup
+	# Base tax variable
+	every_country = {
+		if = {
+			limit = {
+				check_variable = {
+					which = vvtqol_base_tax_development_clicks
+					value = 1
+				}
+			}
+		}
+		else = {
+			set_variable = {
+				which = vvtqol_base_tax_development_clicks
+				value = 0
+			}
+		}
+
+        if = {
+			limit = {
+				check_variable = {
+					which = vvtqol_automatic_base_tax_clicks
+					value = 1
+				}
+			}
+		}
+		else = {
+			set_variable = {
+				which = vvtqol_automatic_base_tax_clicks
+				value = 0
+			}
+		}
+	}
+	
+	# Base production variable
+	every_country = {
+		if = {
+			limit = {
+				check_variable = {
+					which = vvtqol_base_production_development_clicks
+					value = 1
+				}
+			}
+		}
+		else = {
+			set_variable = {
+				which = vvtqol_base_production_development_clicks
+				value = 0
+			}
+		}
+
+        if = {
+			limit = {
+				check_variable = {
+					which = vvtqol_automatic_base_production_clicks
+					value = 1
+				}
+			}
+		}
+		else = {
+			set_variable = {
+				which = vvtqol_automatic_base_production_clicks
+				value = 0
+			}
+		}
+	}
+	
+	# Base manpower variable
+	every_country = {
+		if = {
+			limit = {
+				check_variable = {
+					which = vvtqol_base_manpower_development_clicks
+					value = 1
+				}
+			}
+		}
+		else = {
+			set_variable = {
+				which = vvtqol_base_manpower_development_clicks
+				value = 0
+			}
+		}
+
+        if = {
+			limit = {
+				check_variable = {
+					which = vvtqol_automatic_base_manpower_clicks
+					value = 1
+				}
+			}
+		}
+		else = {
+			set_variable = {
+				which = vvtqol_automatic_base_manpower_clicks
+				value = 0
+			}
+		}
+	}
+
+	# Total development clicks variable
+	every_country = {
+		if = {
+			limit = {
+				check_variable = {
+					which = vvtqol_total_development_clicks
+					value = 1
+				}
+			}
+		}
+		else = {
+			set_variable = {
+				which = vvtqol_total_development_clicks
+				value = 0
+			}
+		}
+
+        if = {
+			limit = {
+				check_variable = {
+					which = vvtqol_total_automatic_development_clicks
+					value = 1
+				}
+			}
+		}
+		else = {
+			set_variable = {
+				which = vvtqol_total_automatic_development_clicks
+				value = 0
+			}
+		}
+	}
+
+    # Allow single player -> multiplayer games 
+    clr_global_flag = vvtqol_singleplayer
+    clr_global_flag = vvtqol_multiplayer
+    
+    # Create non-ai actor counter
+    set_variable = {
+        which = vvtqol_player_count
+        value = 0
+    }
+
+    # Count non-ai actors for multiplayer checks
+    every_country = {
+        if = {
+            limit = {
+                ai = no
+            }
+
+            change_variable = {
+                which = vvtqol_player_count
+                value = 1
+            }
+        }
+    }
+
+    if = {
+        limit = {
+            check_variable = {
+                which = vvtqol_player_count
+                value = 2
+            }
+        }
+
+        set_global_flag = vvtqol_multiplayer
+    }
+    
+    else = {
+        set_global_flag = vvtqol_singleplayer
+        
+        set_global_flag = vvtqol_educate_ruler_allowed
+        set_global_flag = vvtqol_instant_national_focus_allowed
+        set_global_flag = vvtqol_no_governing_capacity_allowed
+        set_global_flag = vvtqol_no_aggressive_expansion_allowed
+        set_global_flag = vvtqol_automatic_development_allowed
+    }	
+}
+
+on_adm_development = {
+    on_adm_development_vanilla_scripted_effects = yes
+    
+	hidden_effect = {
+		owner = {
+			change_variable = {
+				which = vvtqol_base_tax_development_clicks
+				value = 1
+			}
+			
+			change_variable = {
+				which = vvtqol_total_development_clicks
+				value = 1
+			}
+		}
+	}
+}
+
+on_dip_development = {
+    on_dip_development_vanilla_scripted_effects = yes
+    
+	hidden_effect = {
+		owner = {
+			change_variable = {
+				which = vvtqol_base_production_development_clicks
+				value = 1
+			}
+			
+			change_variable = {
+				which = vvtqol_total_development_clicks
+				value = 1
+			}
+		}
+	}
+}
+
+on_mil_development = {
+    on_mil_development_vanilla_scripted_effects = yes
+    
+	hidden_effect = {
+		owner = {
+			change_variable = {
+				which = vvtqol_base_manpower_development_clicks
+				value = 1
+			}
+			
+			change_variable = {
+				which = vvtqol_total_development_clicks
+				value = 1
+			}
+		}
+	}
+}

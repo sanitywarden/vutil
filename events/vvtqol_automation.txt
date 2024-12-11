@@ -1,0 +1,720 @@
+namespace = vvtqol_events
+
+# Set powerpoint requirement
+country_event = {
+    id = vvtqol_events.7
+    title = vvtqol_events.7.t
+    desc = vvtqol_events.7.d
+    picture = BURGHER_ESTATE_eventPicture
+    is_triggered_only = yes
+
+    # Close
+    option = {
+        name = vvtqol_events.close
+    }
+
+    # Set to 100
+    option = {
+        name = vvtqol_events.7.set100
+
+        set_variable = {
+            which = vvtqol_powerpoints_requirement
+            value = 100
+        }
+    }
+
+    # Set to 200
+    option = {
+        name = vvtqol_events.7.set200
+
+        set_variable = {
+            which = vvtqol_powerpoints_requirement
+            value = 200
+        }
+    }
+    
+    # Set to 300
+    option = {
+        name = vvtqol_events.7.set300
+
+        set_variable = {
+            which = vvtqol_powerpoints_requirement
+            value = 300
+        }
+    }
+
+    # Set to 400
+    option = {
+        name = vvtqol_events.7.set400
+
+        set_variable = {
+            which = vvtqol_powerpoints_requirement
+            value = 400
+        }
+    }
+
+    # Set to 500
+    option = {
+        name = vvtqol_events.7.set500
+
+        set_variable = {
+            which = vvtqol_powerpoints_requirement
+            value = 500
+        }
+    }
+
+    # Set to 600
+    option = {
+        name = vvtqol_events.7.set600
+
+        set_variable = {
+            which = vvtqol_powerpoints_requirement
+            value = 600
+        }
+    }
+
+    # Set to 700
+    option = {
+        name = vvtqol_events.7.set700
+
+        set_variable = {
+            which = vvtqol_powerpoints_requirement
+            value = 700
+        }
+    }
+
+    # Set to 800
+    option = {
+        name = vvtqol_events.7.set800
+
+        set_variable = {
+            which = vvtqol_powerpoints_requirement
+            value = 800
+        }
+    }
+
+    # Set to 900
+    option = {
+        name = vvtqol_events.7.set900
+
+        set_variable = {
+            which = vvtqol_powerpoints_requirement
+            value = 900
+        }
+    }
+
+    # Set to 1000
+    option = {
+        name = vvtqol_events.7.set1000
+
+        set_variable = {
+            which = vvtqol_powerpoints_requirement
+            value = 1000
+        }
+    }
+}
+
+# Set automation decisions
+country_event = {
+    id = vvtqol_events.8
+    title = vvtqol_events.8.t
+    desc = vvtqol_events.8.d
+    picture = BURGHER_ESTATE_eventPicture
+    is_triggered_only = yes
+
+    # Close
+    option = {
+        name = vvtqol_events.close
+    }    
+
+    # Allow only capital region
+    option = {
+        name = vvtqol_events.allow_capital_region
+        trigger = { NOT = { has_country_flag = vvtqol_capital_region_allowed }}
+
+        set_country_flag = vvtqol_capital_region_allowed
+    }
+
+    # Disallow only capital region
+    option = {
+        name = vvtqol_events.disallow_capital_region
+        trigger = { has_country_flag = vvtqol_capital_region_allowed }
+
+        clr_country_flag = vvtqol_capital_region_allowed
+    }
+
+    # Allow only in culture group provinces
+    option = {
+        name = vvtqol_events.allow_culture_group
+        trigger = { NOT = { has_country_flag = vvtqol_culture_group_allowed }}
+
+        set_country_flag = vvtqol_culture_group_allowed
+    }
+
+    # Disallow only in culture group provinces
+    option = {
+        name = vvtqol_events.disallow_culture_group
+        trigger = { has_country_flag = vvtqol_culture_group_allowed }
+
+        clr_country_flag = vvtqol_culture_group_allowed
+    }
+
+    # Allow Western Europe
+    option = {
+        name = vvtqol_events.allow_western_europe
+        trigger = { NOT = { has_country_flag = vvtqol_western_europe_allowed }}
+
+        set_country_flag = vvtqol_western_europe_allowed
+    }
+
+    # Disallow Western Europe
+    option = {
+        name = vvtqol_events.disallow_western_europe
+        trigger = { has_country_flag = vvtqol_western_europe_allowed }
+
+        clr_country_flag = vvtqol_western_europe_allowed
+    }
+
+    # Allow Eastern Europe
+    option = {
+        name = vvtqol_events.allow_eastern_europe
+        trigger = { NOT = { has_country_flag = vvtqol_eastern_europe_allowed }}
+
+        set_country_flag = vvtqol_eastern_europe_allowed
+    }
+
+    # Disallow Eastern Europe 
+    option = {
+        name = vvtqol_events.disallow_eastern_europe
+        trigger = { has_country_flag = vvtqol_eastern_europe_allowed }
+    
+        clr_country_flag = vvtqol_eastern_europe_allowed
+    }
+
+    # Allow Northern Africa
+    option = {
+        name = vvtqol_events.allow_northern_africa
+        trigger = { NOT = { has_country_flag = vvtqol_northern_africa_allowed }}
+
+        set_country_flag = vvtqol_northern_africa_allowed
+    }
+
+    # Disallow Northern Africa
+    option = {
+        name = vvtqol_events.disallow_northern_africa
+        trigger = { has_country_flag = vvtqol_northern_africa_allowed }
+
+        clr_country_flag = vvtqol_northern_africa_allowed
+    }
+
+    # Allow Southern Africa
+    option = {
+        name = vvtqol_events.allow_south_africa
+        trigger = { NOT = { has_country_flag = vvtqol_southern_africa_allowed }}
+    
+        set_country_flag = vvtqol_southern_africa_allowed
+    }
+
+    # Disallow Southern Africa
+    option = {
+        name = vvtqol_events.disallow_south_africa
+        trigger = { has_country_flag = vvtqol_southern_africa_allowed }
+    
+        clr_country_flag = vvtqol_southern_africa_allowed
+    }
+
+    # Allow Levant
+    option = {
+        name = vvtqol_events.allow_levant
+        trigger = { NOT = { has_country_flag = vvtqol_levant_allowed }}
+    
+        set_country_flag = vvtqol_levant_allowed
+    }
+
+    # Disallow Levant
+    option = {
+        name = vvtqol_events.disallow_levant
+        trigger = { has_country_flag = vvtqol_levant_allowed }
+
+        clr_country_flag = vvtqol_levant_allowed
+    }
+
+    # Allow Persia
+    option = {
+        name = vvtqol_events.allow_persia
+        trigger = { NOT = { has_country_flag = vvtqol_persia_allowed }}
+    
+        set_country_flag = vvtqol_persia_allowed
+    }
+
+    # Disallow Persia
+    option = {
+        name = vvtqol_events.disallow_persia
+        trigger = { has_country_flag = vvtqol_persia_allowed }
+
+        clr_country_flag = vvtqol_persia_allowed
+    }
+    
+    # Allow India
+    option = {
+        name = vvtqol_events.allow_india
+        trigger = { NOT = { has_country_flag = vvtqol_india_allowed }}
+    
+        set_country_flag = vvtqol_india_allowed
+    }
+
+    # Disallow India
+    option = {
+        name = vvtqol_events.disallow_india
+        trigger = { has_country_flag = vvtqol_india_allowed }
+
+        clr_country_flag = vvtqol_india_allowed
+    }
+    
+    # Allow Indonesia
+    option = {
+        name = vvtqol_events.allow_indonesia
+        trigger = { NOT = { has_country_flag = vvtqol_indonesia_allowed }}
+    
+        set_country_flag = vvtqol_indonesia_allowed
+    }
+
+    # Disallow Indonesia
+    option = {
+        name = vvtqol_events.disallow_indonesia
+        trigger = { has_country_flag = vvtqol_indonesia_allowed }
+
+        clr_country_flag = vvtqol_indonesia_allowed
+    }
+    
+    # Allow China
+    option = {
+        name = vvtqol_events.allow_china
+        trigger = { NOT = { has_country_flag = vvtqol_china_allowed }}
+    
+        set_country_flag = vvtqol_china_allowed
+    }
+
+    # Disallow China
+    option = {
+        name = vvtqol_events.disallow_china
+        trigger = { has_country_flag = vvtqol_china_allowed }
+
+        clr_country_flag = vvtqol_china_allowed
+    }
+    
+    # Allow Tartary
+    option = {
+        name = vvtqol_events.allow_tartary
+        trigger = { NOT = { has_country_flag = vvtqol_tartary_allowed }}
+    
+        set_country_flag = vvtqol_tartary_allowed
+    }
+
+    # Disallow Tartary
+    option = {
+        name = vvtqol_events.disallow_tartary
+        trigger = { has_country_flag = vvtqol_tartary_allowed }
+    
+        clr_country_flag = vvtqol_tartary_allowed
+    }
+    
+    # Allow Far East
+    option = {
+        name = vvtqol_events.allow_far_east
+        trigger = { has_country_flag = vvtqol_far_east_allowed }
+    
+        set_country_flag = vvtqol_far_east_allowed
+    }
+
+    # Disallow Far East
+    option = {
+        name = vvtqol_events.disallow_far_east
+        trigger = { has_country_flag = vvtqol_far_east_allowed }
+    
+        clr_country_flag = vvtqol_far_east_allowed
+    }
+    
+    # Allow Australia
+    option = {
+        name = vvtqol_events.allow_australia
+        trigger = { NOT = { has_country_flag = vvtqol_australia_allowed }}
+    
+        set_country_flag = vvtqol_australia_allowed
+    }
+
+    # Disallow Australia
+    option = {
+        name = vvtqol_events.disallow_australia
+        trigger = { has_country_flag = vvtqol_australia_allowed }
+    
+        clr_country_flag = vvtqol_australia_allowed
+    }
+
+    # Allow Amazonas
+    option = {
+        name = vvtqol_events.allow_amazonas
+        trigger = { NOT = { has_country_flag = vvtqol_amazonas_allowed }}
+    
+        set_country_flag = vvtqol_amazonas_allowed
+    }
+
+    # Disallow Amazonas 
+    option = {
+        name = vvtqol_events.disallow_amazonas
+        trigger = { has_country_flag = vvtqol_amazonas_allowed }
+    
+        clr_country_flag = vvtqol_amazonas_allowed
+    }
+
+    # Allow Andes
+    option = {
+        name = vvtqol_events.allow_andes
+        trigger = { NOT = { has_country_flag = vvtqol_andes_allowed }}
+    
+        set_country_flag = vvtqol_andes_allowed
+    }
+
+    # Disallow Andes
+    option = {
+        name = vvtqol_events.disallow_andes
+        trigger = { has_country_flag = vvtqol_andes_allowed }
+    
+        clr_country_flag = vvtqol_andes_allowed
+    }
+
+    # Allow Central America
+    option = {
+        name = vvtqol_events.allow_central_america
+        trigger = { NOT = { has_country_flag = vvtqol_central_america_allowed }}
+    
+        set_country_flag = vvtqol_central_america_allowed
+    }
+
+    # Disallow Central America
+    option = {
+        name = vvtqol_events.disallow_central_america
+        trigger = { has_country_flag = vvtqol_central_america_allowed }
+    
+        clr_country_flag = vvtqol_central_america_allowed
+    }
+
+    # Allow North America
+    option = {
+        name = vvtqol_events.allow_north_america
+        trigger = { NOT = { has_country_flag = vvtqol_north_america_allowed }}
+    
+        set_country_flag = vvtqol_north_america_allowed
+    }
+
+    # Disallow North America
+    option = {
+        name = vvtqol_events.disallow_north_america
+        trigger = { has_country_flag = vvtqol_north_america_allowed }
+    
+        clr_country_flag = vvtqol_north_america_allowed
+    }
+}
+
+# Hidden event for base tax click
+country_event = {
+	id = vvtqol_events.9
+	title = vvtqol_events.9.t
+	desc = vvtqol_events.9.d
+    picture = BURGHER_ESTATE_eventPicture
+	hidden = yes
+	
+    mean_time_to_happen = { days = 1 }
+	trigger = {
+        ai = no
+        has_country_flag = vvtqol_automatic_development_enabled
+        has_country_flag = vvtqol_automation_base_tax_enabled
+
+        vvtqol_trigger_is_any_province_allowed_for_automation = yes
+
+        OR = {
+            had_country_flag = { flag = vvtqol_recent_adm_click days = 1 }
+            NOT = { has_country_flag = vvtqol_recent_adm_click }
+        }
+
+        # Check if the target has powerpoints over the threshold
+		variable_arithmetic_trigger = {
+            custom_tooltip = vvtqol_events.9.tooltip
+
+            export_to_variable = {
+                variable_name = vvtqol_powerpoints_adm
+                value = trigger_value:adm_power
+                who = FROM
+            }
+
+            check_variable = {
+                which = vvtqol_powerpoints_adm
+                which = vvtqol_powerpoints_requirement
+            }
+        }
+	}
+	
+    immediate = {
+        hidden_effect = {
+            clr_country_flag = vvtqol_recent_adm_click
+            set_country_flag = vvtqol_recent_adm_click
+
+            develop_province = { VARIABLE_NAME = province }
+            
+            event_target:province = {
+                remove_powerpoints = { POWER = adm }
+                add_base_tax = 1   
+            }
+
+            change_estate_land_share = {
+                estate = all
+                share = -0.2
+            }
+
+            change_variable = {
+                which = vvtqol_total_automatic_development_clicks
+                value = 1
+            }
+
+            change_variable = {
+                which = vvtqol_automatic_base_tax_clicks
+                value = 1
+            }
+        }
+    }
+
+	option = {
+        name = vvtqol_events.9.t
+    }
+}
+
+# Hidden event for base production click
+country_event = {
+	id = vvtqol_events.10
+	title = vvtqol_events.10.t
+	desc = vvtqol_events.10.d
+    picture = BURGHER_ESTATE_eventPicture
+	hidden = yes
+	
+    mean_time_to_happen = { days = 1 }
+
+	trigger = {
+        ai = no
+        has_country_flag = vvtqol_automatic_development_enabled
+        has_country_flag = vvtqol_automation_base_production_enabled
+        
+        vvtqol_trigger_is_any_province_allowed_for_automation = yes
+
+        OR = {
+            had_country_flag = { flag = vvtqol_recent_dip_click days = 1 }
+            NOT = { has_country_flag = vvtqol_recent_dip_click }
+        }
+
+        # Check if the target has powerpoints over the threshold
+		variable_arithmetic_trigger = {
+            custom_tooltip = vvtqol_events.10.tooltip
+
+            export_to_variable = {
+                variable_name = vvtqol_powerpoints_dip
+                value = trigger_value:dip_power
+                who = FROM
+            }
+
+            check_variable = {
+                which = vvtqol_powerpoints_dip
+                which = vvtqol_powerpoints_requirement
+            }
+        }
+	}
+	
+    immediate = {
+        hidden_effect = { 
+            clr_country_flag = vvtqol_recent_dip_click
+            set_country_flag = vvtqol_recent_dip_click
+
+            develop_province = { VARIABLE_NAME = province }
+
+            event_target:province = {
+                remove_powerpoints = { POWER = dip }
+                add_base_production = 1
+            }
+
+            change_estate_land_share = {
+                estate = all
+                share = -0.2
+            }
+
+            change_variable = {
+                which = vvtqol_total_automatic_development_clicks
+                value = 1
+            }
+
+            change_variable = {
+                which = vvtqol_automatic_base_production_clicks
+                value = 1
+            }
+        }
+    }
+
+	option = {
+        name = vvtqol_events.10.t
+    }
+}
+
+# Hidden event for base manpower click
+country_event = {
+	id = vvtqol_events.11
+	title = vvtqol_events.11.t
+	desc = vvtqol_events.11.d
+    picture = BURGHER_ESTATE_eventPicture
+	hidden = yes
+	
+    mean_time_to_happen = { days = 1 }
+    
+	trigger = {
+        ai = no
+        has_country_flag = vvtqol_automatic_development_enabled
+        has_country_flag = vvtqol_automation_base_manpower_enabled
+        
+        vvtqol_trigger_is_any_province_allowed_for_automation = yes
+
+        OR = {
+            had_country_flag = { flag = vvtqol_recent_mil_click days = 1 }
+            NOT = { has_country_flag = vvtqol_recent_mil_click }
+        }
+
+        # Check if the target has powerpoints over the threshold
+		variable_arithmetic_trigger = {
+            custom_tooltip = vvtqol_events.11.tooltip
+
+            export_to_variable = {
+                variable_name = vvtqol_powerpoints_mil
+                value = trigger_value:mil_power
+                who = FROM
+            }
+
+            check_variable = {
+                which = vvtqol_powerpoints_mil
+                which = vvtqol_powerpoints_requirement
+            }
+        }
+	}
+	
+    immediate = {
+        hidden_effect = {
+            clr_country_flag = vvtqol_recent_mil_click
+            set_country_flag = vvtqol_recent_mil_click
+
+            develop_province = { VARIABLE_NAME = province }
+
+            event_target:province = {
+                remove_powerpoints = { POWER = mil }
+                add_base_manpower = 1
+            }
+
+            change_estate_land_share = {
+                estate = all
+                share = -0.2
+            }
+
+            change_variable = {
+                which = vvtqol_total_automatic_development_clicks
+                value = 1
+            }
+
+            change_variable = {
+                which = vvtqol_automatic_base_manpower_clicks
+                value = 1
+            }
+        }
+    }
+
+	option = {
+        name = vvtqol_events.11.t
+    }
+}
+
+country_event = {
+    id = vvtqol_events.12
+    title = vvtqol_events.12.t
+    desc = vvtqol_automationmenu_configure_automatic_development_desc
+    picture = BURGHER_ESTATE_eventPicture
+    is_triggered_only = yes
+
+    option = {
+        name = vvtqol_events.close
+    }
+
+    option = {
+        name = vvtqol_events.12.optimal
+
+        hidden_effect = {   
+            set_country_flag = vvtqol_optimal_automatic_development_enabled
+        }
+    }
+
+    option = {
+        name = vvtqol_events.12.constrained
+        
+        hidden_effect = {
+            clr_country_flag = vvtqol_optimal_automatic_development_enabled
+        }
+    }
+}
+
+country_event = {
+    id = vvtqol_events.13
+    title = vvtqol_events.13.t
+    desc = vvtqol_events.13.d
+    picture = BURGHER_ESTATE_eventPicture
+    is_triggered_only = yes
+
+    option = {
+        name = vvtqol_events.close
+    }
+
+    option = {
+        name = vvtqol_events.13.10
+
+        set_variable = {
+            which = vvtqol_development_target
+            value = 10
+        }
+    }
+
+    option = {
+        name = vvtqol_events.13.20
+        
+        set_variable = {
+            which = vvtqol_development_target
+            value = 20
+        }
+    }
+
+    option = {
+        name = vvtqol_events.13.30
+        
+        set_variable = {
+            which = vvtqol_development_target
+            value = 30
+        }
+    }
+
+    option = {
+        name = vvtqol_events.13.40
+
+        set_variable = {
+            which = vvtqol_development_target
+            value = 40
+        }   
+    }
+
+    option = {
+        name = vvtqol_events.13.50
+
+        set_variable = {
+            which = vvtqol_development_target
+            value = 50
+        }
+    }
+}

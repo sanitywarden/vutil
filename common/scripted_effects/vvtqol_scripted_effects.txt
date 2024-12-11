@@ -1,0 +1,230 @@
+# Arguments: $BUILDING$ $BUILDING_COST$
+vvtqol_effect_build_building_while_can_afford = {
+    while = {
+        limit = {
+            any_owned_province = {
+                vvtqol_trigger_can_construct_building = { BUILDING = $BUILDING$ BUILDING_COST = $BUILDING_COST$ }
+            }
+        }
+
+        vvtqol_effect_random_begin_building_construction_checked = { BUILDING = $BUILDING$ BUILDING_COST = $BUILDING_COST$ }
+    }
+}
+
+# Arguments: $COST$
+vvtqol_effect_upgrade_fort_in_province = {
+	add_latest_building = { builder = $BUILDER$ fort = yes }
+	add_treasury = -$COST$
+}
+
+# Arguments: $BUILDING$ $BUILDING_COST$
+vvtqol_effect_random_begin_building_construction_checked = {
+    random_owned_province = {
+        limit = {
+            vvtqol_trigger_can_construct_building = { BUILDING = $BUILDING$ }
+        }
+
+        add_building_construction = { building = $BUILDING$ speed = 1 cost = 1 }
+        ROOT = {
+			add_treasury = -$BUILDING_COST$
+		}
+    }
+}
+
+# Arguments: $INVESTMENT$ $INVESTMENT_COST$ $BETTER_INVESTMENT$
+# Better investment is a variable used to check when building a tier 1 TC if a tier 2 TC investment already exists
+vvtqol_effect_build_tcinvestment_while_can_afford = {
+	while = {
+		limit = {
+			any_owned_province = {
+				AND = {
+					vvtqol_trigger_can_tc_invest = { INVESTMENT = $INVESTMENT$ INVESTMENT_COST = $INVESTMENT_COST$ }
+					vvtqol_trigger_can_tc_invest = { INVESTMENT = $BETTER_INVESTMENT$ INVESTMENT_COST = $INVESTMENT_COST$ } 
+				}
+			}
+		}
+
+		vvtqol_effect_build_tcinvestment = { INVESTMENT = $INVESTMENT$ INVESTMENT_COST = $INVESTMENT_COST$ }
+	}
+}
+
+# Arguments: $INVESTMENT$ $INVESTMENT_COST$
+vvtqol_effect_build_tcinvestment = {
+	random_owned_area = {
+		limit = {
+			vvtqol_trigger_can_tc_invest = { INVESTMENT = $INVESTMENT$ INVESTMENT_COST = $INVESTMENT_COST$ }
+		}
+
+		add_trade_company_investment = {
+			investor = ROOT
+			investment = $INVESTMENT$
+		}
+	}
+}
+
+# Arguments: $VARIABLE_NAME$
+vvtqol_effect_set_province_development_cost = {
+    set_variable = {
+		which = $VARIABLE_NAME$
+		value = 1 
+	}
+	
+	export_to_variable = {
+		variable_name = vvtqol_automation_all_power_cost
+		value = modifier:all_power_cost
+		who = owner
+	}
+
+	change_variable = {
+		which = $VARIABLE_NAME$
+		which = vvtqol_automation_all_power_cost
+	}
+	
+	export_to_variable = {
+		variable_name = vvtqol_automation_development_cost
+		value = modifier:development_cost
+		who = owner
+	}
+    
+	change_variable = {
+		which = $VARIABLE_NAME$
+		which = vvtqol_automation_development_cost
+	}
+	
+	export_to_variable = {
+		variable_name = vvtqol_automation_local_development_cost
+		value = modifier:local_development_cost
+	}
+
+	change_variable = {
+		which = $VARIABLE_NAME$
+		which = vvtqol_automation_local_development_cost
+	}
+	
+    # Development cost modifier
+	if = { 
+		limit = {
+			owner = { adm_tech = 27 } 
+		}
+		multiply_variable = { 
+			which = $VARIABLE_NAME$
+			value = 35
+		}
+	}
+	
+    else_if  = {
+		limit = {
+			owner = { adm_tech = 23 } 
+		}
+		multiply_variable = { 
+			which = $VARIABLE_NAME$
+			value = 40
+		}
+	}
+	
+    else_if  = {
+		limit = {
+			owner = { adm_tech = 17 }
+		}
+		multiply_variable = { 
+			which = $VARIABLE_NAME$
+			value = 45
+		}
+	}
+	
+    else = {
+		multiply_variable = { 
+			which = $VARIABLE_NAME$
+			value = 50
+		}
+	}
+}
+
+# Find cheapest province to develop 
+# Arguments: $VARIABLE_NAME$
+find_cheapest_province = {
+    random_owned_province = {
+        limit = {
+            vvtqol_trigger_is_cheapest_province = yes
+        }
+
+        # Find the cost of improvement
+        vvtqol_effect_set_province_development_cost = { VARIABLE_NAME = province_cost }
+        
+        # Find the province
+        save_event_target_as = $VARIABLE_NAME$
+    }
+}
+
+# Find any province meeting the requirements to develop
+# Arguments: $VARIABLE_NAME$
+find_constrained_province = {
+    random_owned_province = {
+        limit = {
+            vvtqol_trigger_is_province_allowed_for_automation = yes  
+            vvtqol_trigger_province_development_is_less_than_target_development = yes
+        }
+        
+        # Find the cost of improvement
+        vvtqol_effect_set_province_development_cost = { VARIABLE_NAME = province_cost }
+        
+        # Find the province
+        save_event_target_as = $VARIABLE_NAME$
+    }
+}
+
+# Arguments: $VARIABLE_NAME$
+develop_province = {
+    if = { 
+        limit = { has_country_flag = vvtqol_optimal_automatic_development_enabled }
+        find_cheapest_province = { VARIABLE_NAME = $VARIABLE_NAME$ }
+    }
+    else = {
+        find_constrained_province = { VARIABLE_NAME = $VARIABLE_NAME$ }
+    }
+}
+
+# I do not really understand why I'm doing this
+# Source: reddit.com/r/eu4/comments/dy7lyv
+# Arguments: $POWER$
+remove_powerpoints = {
+    set_variable = {
+        which = vvtqol_remove_powerpoints_variable
+        which = province_cost
+    }
+
+    binary_add = { VARIABLE = vvtqol_remove_powerpoints_variable POWER = $POWER$ VALUE_ADD = 1024 VALUE_SUB = -1024 }
+	binary_add = { VARIABLE = vvtqol_remove_powerpoints_variable POWER = $POWER$ VALUE_ADD = 512  VALUE_SUB = -512 }
+	binary_add = { VARIABLE = vvtqol_remove_powerpoints_variable POWER = $POWER$ VALUE_ADD = 256  VALUE_SUB = -256 }
+	binary_add = { VARIABLE = vvtqol_remove_powerpoints_variable POWER = $POWER$ VALUE_ADD = 128  VALUE_SUB = -128 }
+	binary_add = { VARIABLE = vvtqol_remove_powerpoints_variable POWER = $POWER$ VALUE_ADD = 64   VALUE_SUB = -64 }
+	binary_add = { VARIABLE = vvtqol_remove_powerpoints_variable POWER = $POWER$ VALUE_ADD = 32   VALUE_SUB = -32 }
+	binary_add = { VARIABLE = vvtqol_remove_powerpoints_variable POWER = $POWER$ VALUE_ADD = 16   VALUE_SUB = -16 }
+	binary_add = { VARIABLE = vvtqol_remove_powerpoints_variable POWER = $POWER$ VALUE_ADD = 8    VALUE_SUB = -8 }
+	binary_add = { VARIABLE = vvtqol_remove_powerpoints_variable POWER = $POWER$ VALUE_ADD = 4    VALUE_SUB = -4 }
+	binary_add = { VARIABLE = vvtqol_remove_powerpoints_variable POWER = $POWER$ VALUE_ADD = 2    VALUE_SUB = -2 }
+	binary_add = { VARIABLE = vvtqol_remove_powerpoints_variable POWER = $POWER$ VALUE_ADD = 1    VALUE_SUB = -1 }
+}
+
+# I do not really understand why I'm doing this
+# Source: reddit.com/r/eu4/comments/dy7lyv
+# Arguments: $VARIABLE$ $POWER$ $VALUE_ADD$ $VALUE_SUB$
+binary_add = {
+    if = {
+		limit = {
+			check_variable = {
+				which = $VARIABLE$
+				value = $VALUE_ADD$
+			}
+		}
+		
+        owner = {
+			add_$POWER$_power = $VALUE_SUB$
+		}
+		
+		subtract_variable = {
+			which = $VARIABLE$
+			value = $VALUE_ADD$
+		}
+	}
+}

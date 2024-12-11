@@ -1,0 +1,975 @@
+#########################################
+#			  Created by				#
+#			     Vivit					#
+#########################################
+
+country_decisions = {
+	# Enable mod toggle
+	vvtqol_enable = {
+        color = { 152 4 82 }
+		potential = {
+			ai = no
+			NOT = {
+				has_country_flag = vvtqol_decisions_enabled
+			}
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+		
+		allow = {}
+
+		effect = {
+			set_country_flag = vvtqol_decisions_enabled
+		}
+	}
+	
+	# Disable mod toggle
+	vvtqol_disable = {
+		color = { 152 4 82 }
+        potential = {
+			ai = no
+			has_country_flag = vvtqol_decisions_enabled
+		}
+	
+		allow = {}
+
+		effect = {
+			clr_country_flag = vvtqol_decisions_enabled
+		}
+	}
+
+    ### Building management menu start ###
+    # Enable building menu toggle
+    vvtqol_buildingmenu_enable = {
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            NOT = {
+                has_country_flag = vvtqol_buildingmenu_enabled
+            }
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+		allow = {}
+
+        effect = {
+            set_country_flag = vvtqol_buildingmenu_enabled
+        }
+    }
+
+    # Disable building menu toggle
+    vvtqol_buildingmenu_disable = {
+        
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_enabled
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+		allow = {}
+
+        effect = {
+            clr_country_flag = vvtqol_buildingmenu_enabled
+            clr_country_flag = vvtqol_buildingmenu_buildsubmenu_enabled
+            clr_country_flag = vvtqol_buildingmenu_destroysubmenu_enabled
+			clr_country_flag = vvtqol_buildingmenu_tradecompanysubmenu_enabled
+        }
+    }
+
+    # Enable build submenu toggle
+    vvtqol_buildingmenu_buildsubmenu_enable = {   
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_enabled
+            NOT = {
+                has_country_flag = vvtqol_buildingmenu_buildsubmenu_enabled
+            }
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+		allow = {}
+
+		effect = {
+            set_country_flag = vvtqol_buildingmenu_buildsubmenu_enabled
+        }
+    }
+
+    # Disable bulid submenu toggle  
+    vvtqol_buildingmenu_buildsubmenu_disable = {      
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_enabled
+            has_country_flag = vvtqol_buildingmenu_buildsubmenu_enabled
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+		allow = {}
+
+        effect = {
+            clr_country_flag = vvtqol_buildingmenu_buildsubmenu_enabled
+        }
+    }
+
+    # Enable destroy submenu toggle
+    vvtqol_buildingmenu_destroysubmenu_enable = {
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_enabled
+            NOT = {
+                has_country_flag = vvtqol_buildingmenu_destroysubmenu_enabled
+            }
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+		
+		allow = {}
+
+        effect = {
+            set_country_flag = vvtqol_buildingmenu_destroysubmenu_enabled
+        }
+    }
+
+    # Disable destroy submenu toggle
+    vvtqol_buildingmenu_destroysubmenu_disable = {
+        color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_enabled
+            has_country_flag = vvtqol_buildingmenu_destroysubmenu_enabled
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+		allow = {}
+
+        effect = {
+            clr_country_flag = vvtqol_buildingmenu_destroysubmenu_enabled
+        }
+    }
+
+	# Enable tradecompany investments submenu toggle
+	vvtqol_buildingmenu_tradecompanysubmenu_enable = {
+		color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_enabled
+            NOT = {
+                has_country_flag = vvtqol_buildingmenu_tradecompanysubmenu_enabled
+            }
+			any_owned_province = {
+				is_owned_by_trade_company = yes
+			}
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+		allow = {}
+
+        effect = {
+            set_country_flag = vvtqol_buildingmenu_tradecompanysubmenu_enabled
+        }
+	}
+
+	# Disable tradecompany investments submenu toggle
+	vvtqol_buildingmenu_tradecompanysubmenu_disable = {
+		color = { 170 4 120 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_buildingmenu_enabled
+			has_country_flag = vvtqol_buildingmenu_tradecompanysubmenu_enabled
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+		allow = {}
+
+        effect = {
+            clr_country_flag = vvtqol_buildingmenu_tradecompanysubmenu_enabled
+        }
+	}
+	
+    ### Building management menu end ###
+	
+	# Recognise the player as game master
+	# Game master can enact certain decisions regarding the game that should not be available to everyone in the game
+	vvtqol_become_game_master = {  
+        color = { 152 4 82 }
+        potential = {
+            ai = no
+            
+            has_country_flag = vvtqol_decisions_enabled
+            has_global_flag = vvtqol_multiplayer
+                
+            NOT = {
+                has_global_flag = vvtqol_game_master_selected
+                has_global_flag = vvtqol_singleplayer
+            }
+		}
+		
+		allow = {}
+
+		effect = {
+			set_country_flag = vvtqol_game_master
+			set_global_flag = vvtqol_game_master_selected
+		}
+	}
+	
+	# Resign from being the game master
+	vvtqol_resign_game_master = {
+        color = { 152 4 82 }
+        potential = {
+			ai = no
+			has_country_flag = vvtqol_game_master
+			has_country_flag = vvtqol_decisions_enabled
+		}
+		
+		allow = {}
+		
+		effect = {
+			clr_country_flag = vvtqol_game_master
+			clr_global_flag = vvtqol_game_master_selected
+		}
+	}
+
+	# Decision displaying gameplay features
+	vvtqol_game_info = {
+		color = { 30 6 120 }
+		potential = {}
+
+		ai_will_do = {
+			factor = 0
+		}
+
+		allow = {
+			custom_trigger_tooltip = {
+				tooltip = vvtqol_game_info_tooltip
+				always = no
+			}
+		}
+
+		effect = {}
+	} 
+	
+	# Decision displaying development clicks counter
+	vvtqol_devclick_counter = {
+        color = { 30 6 120 }
+        potential = {}
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {
+			hidden_trigger = {	
+				always = no
+			}
+            custom_trigger_tooltip = {
+                tooltip = vvtqol_devclick_counter_tooltip
+            }
+        }
+
+		effect = {}
+	}
+
+	# Educate ruler event trigger
+    vvtqol_educate_ruler = {
+		color = { 30 6 120 }
+        potential = {
+            OR = {
+                has_global_flag = vvtqol_educate_ruler_allowed
+                has_global_flag = vvtqol_singleplayer
+            }
+        }
+
+        allow = {            
+            NOT = {
+                has_country_modifier = vvtqol_ruler_recently_educated
+			}
+			has_regency = no
+        }
+
+        effect = {
+            country_event = {
+                id = vvtqol_events.1
+                days = 0
+            }
+        }
+    }
+
+    # Join HRE
+    vvtqol_join_hre = {
+        color = { 30 6 120 }
+        potential = {
+            ai = no
+            is_part_of_hre = no
+            any_owned_province = {
+                is_part_of_hre = yes
+            }
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {
+            emperor = {
+                has_opinion = {
+                    who = ROOT
+                    value = 200
+                }
+            }
+
+            NOT = {
+                total_development = 200
+            }
+        }
+
+        effect = {
+            ROOT = {
+                set_in_empire = yes
+            }
+        }
+    }
+
+    # Tackle debt
+    vvtqol_debt_program = {
+        color = { 30 6 120 }
+        potential = {
+            NOT = {
+                OR = {
+                    has_country_modifier = vvtqol_tackle_debt
+                    has_country_modifier = vvtqol_recovery_after_debt 
+                }
+            }
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {
+            num_of_loans = 8
+            NOT = {
+                is_in_war = { 
+                    participants = THIS
+                }
+            } 
+        }
+
+        effect = {
+            add_country_modifier = {
+                name = vvtqol_tackle_debt
+                duration = -1
+                hidden = no
+            }
+
+            define_advisor = {
+                type = master_of_mint
+                skill = 3
+                culture = event_target:ruler_culture
+                religion = event_target:ruler_religion
+                cost_multiplier = 0.5
+            }
+        }
+    }
+
+    # Finish tackling debt
+    vvtqol_end_debt_program = {
+        color = { 30 6 120 }
+        potential = {
+            has_country_modifier = vvtqol_tackle_debt
+
+            NOT = {
+                has_country_modifier = vvtqol_recovery_after_debt 
+            }
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {
+            NOT = {
+                num_of_loans = 1
+                is_in_war = { 
+                    participants = THIS
+                }
+            }
+        }
+
+        effect = {
+            remove_country_modifier = vvtqol_tackle_debt
+            add_country_modifier = {
+                name = vvtqol_recovery_after_debt
+                duration = 365
+                hidden = no
+            }
+        }
+    }
+	
+	# Per player toggle for no aggressive expansion
+	vvtqol_enable_no_aggressive_expansion = {
+        color = { 152 4 82 }
+        potential = {
+			has_country_flag = vvtqol_decisions_enabled
+            OR = {
+                has_global_flag = vvtqol_no_aggressive_expansion_allowed
+                has_global_flag = vvtqol_singleplayer
+            }
+            
+            NOT = {
+				has_country_modifier = vvtqol_no_aggressive_expansion
+			}
+		}
+
+        allow = {
+            custom_trigger_tooltip = {
+                tooltip = vvtqol_singleplayer_or_game_master_tooltip
+            }
+        }
+		
+		effect = {
+			add_country_modifier = {
+				name = vvtqol_no_aggressive_expansion
+				duration = -1
+			}
+		}
+	}
+	
+	# Per player toggle to disable no aggressive expansion
+	vvtqol_disable_no_aggressive_expansion = {
+        color = { 152 4 82 }
+        potential = {
+			has_country_flag = vvtqol_decisions_enabled
+			has_country_modifier = vvtqol_no_aggressive_expansion
+		}
+		
+		ai_will_do = {
+			factor = 0
+		}
+		
+		allow = {}
+
+		effect = {
+			remove_country_modifier = vvtqol_no_aggressive_expansion
+		}
+	}
+	
+	# Per player toggle for no governing capacity
+	vvtqol_enable_no_governing_capacity = {	
+        color = { 152 4 82 }
+        potential = {
+			has_country_flag = vvtqol_decisions_enabled
+            OR = {
+                has_global_flag = vvtqol_no_governing_capacity_allowed
+                has_global_flag = vvtqol_singleplayer
+            }
+			
+            NOT = {
+				has_country_modifier = vvtqol_no_governing_capacity
+			}
+		}
+
+        allow = {
+            custom_trigger_tooltip = {
+                tooltip = vvtqol_singleplayer_or_game_master_tooltip
+            }
+        }
+
+		effect = {
+			add_country_modifier = {
+				name = vvtqol_no_governing_capacity
+				duration = -1
+			}
+		}
+	}
+	
+	# Per player toggle to disable no governing capacity
+	vvtqol_disable_no_governing_capacity = {
+        color = { 152 4 82 }
+        potential = {
+			has_country_flag = vvtqol_decisions_enabled
+			has_country_modifier = vvtqol_no_governing_capacity
+        }
+		
+		allow = {}
+
+		effect = {
+			remove_country_modifier = vvtqol_no_governing_capacity
+		}
+	}
+	
+	# Game master decision to delete all primitives from north america, south america
+	vvtqol_delete_american_natives = {
+        color = { 152 4 82 }
+        potential = {
+			has_country_flag = vvtqol_decisions_enabled
+			
+            OR = {
+                has_country_flag = vvtqol_game_master
+                has_global_flag = vvtqol_singleplayer
+            }
+			
+            NOT = {
+                has_global_flag = vvtqol_american_natives_deleted
+			}
+		}
+
+        allow = {
+            custom_trigger_tooltip = {
+                tooltip = vvtqol_singleplayer_or_game_master_tooltip
+            }
+        }
+		
+        effect = {
+			set_global_flag = vvtqol_american_natives_deleted
+
+			hidden_effect = {
+				south_america = {
+					limit = {
+						owner = {
+							technology_group = south_american
+						}
+					}
+					
+					cede_province = ---
+					every_owned_province = {
+						limit = {
+							has_building = fort_15th
+						}
+						remove_building = fort_15th
+					}
+				}
+				
+				north_america = {
+					limit = {
+						owner = {
+							technology_group = north_american
+						}
+					}
+					
+					cede_province = ---
+					every_owned_province = {
+						limit = { 
+							has_building = fort_15th 
+						}
+						remove_building = fort_15th
+					}
+				}
+			}
+		}
+	}
+
+	# Game master decision to delete all primitives
+    vvtqol_delete_african_natives = {
+        color = { 152 4 82 }
+        potential = {
+			has_country_flag = vvtqol_decisions_enabled
+			
+            OR = {
+                has_country_flag = vvtqol_game_master
+                has_global_flag = vvtqol_singleplayer
+            }
+			
+            NOT = {
+                has_global_flag = vvtqol_african_natives_deleted
+			}
+		}
+
+        allow = {
+            custom_trigger_tooltip = {
+                tooltip = vvtqol_singleplayer_or_game_master_tooltip
+            }
+        }
+
+        effect = {
+            hidden_effect = {
+                set_global_flag = vvtqol_african_natives_deleted
+                kongo_region = {
+                    limit = {
+                        owner = {
+                            OR = {
+                                technology_group = central_african
+                                technology_group = east_african
+                            }
+                        }
+                    }
+
+                    cede_province = ---
+                    every_owned_province = {
+						limit = {
+							has_building = fort_15th
+						}
+						remove_building = fort_15th
+					}
+                }
+
+                south_africa_region = {
+                    limit = {
+                        owner = {
+                            OR = {
+                                technology_group = central_african
+                                technology_group = east_african
+                            }
+                        }
+                    }
+
+                    cede_province = ---
+                    every_owned_province = {
+						limit = {
+							has_building = fort_15th
+						}
+						remove_building = fort_15th
+					}
+                }
+
+                east_africa_region = {
+                    limit = {
+                        owner = {
+                            OR = {
+                                technology_group = central_african
+                                technology_group = east_african
+                            }
+                        }
+                    }
+
+                    cede_province = ---
+                    every_owned_province = {
+						limit = {
+							has_building = fort_15th
+						}
+						remove_building = fort_15th
+					}
+                }
+
+                central_africa_region = {
+                    limit = {
+                        owner = {
+                            OR = {
+                                technology_group = central_african
+                                technology_group = east_african
+                            }
+                        }
+                    }
+
+                    cede_province = ---
+                    every_owned_province = {
+						limit = {
+							has_building = fort_15th
+						}
+						remove_building = fort_15th
+					}
+                }
+
+            }
+        }
+    }
+
+	# Game master decision to delete all primitives from oceania
+    vvtqol_delete_oceanian_natives = {
+        color = { 152 4 82 }
+        potential = {
+			has_country_flag = vvtqol_decisions_enabled
+			
+            OR = {
+                has_country_flag = vvtqol_game_master
+                has_global_flag = vvtqol_singleplayer
+            }
+			
+            NOT = {
+                has_global_flag = vvtqol_oceanian_natives_deleted
+			}
+		}
+
+        allow = {
+            custom_trigger_tooltip = {
+                tooltip = vvtqol_singleplayer_or_game_master_tooltip
+            }
+        } 
+
+        effect = {
+            hidden_effect = {
+                set_global_flag = vvtqol_oceanian_natives_deleted
+                oceania = {
+					limit = {
+						owner = {
+							OR = { technology_group = aboriginal_tech technology_group = polynesian_tech }
+						}
+					}
+					
+					cede_province = ---
+					every_owned_province = {
+						limit = { 
+							has_building = fort_15th 
+						}
+						remove_building = fort_15th
+					}
+				}
+
+                moluccas_region = {
+                    limit = {
+                        owner = {
+                            religion_group = eastern
+                        }
+                    }
+
+                    cede_province = ---
+                    every_owned_province = {
+                        limit = {
+                            has_building = fort_15th
+                        }
+                        remove_building = fort_15th
+                    }
+                }
+            }
+        }
+    }
+
+    # Game master decision to delete all primitives from kamchatka
+    vvtqol_delete_kamchatkan_natives = {
+        color = { 152 4 82 }
+        potential = {
+			has_country_flag = vvtqol_decisions_enabled
+			
+            OR = {
+                has_country_flag = vvtqol_game_master
+                has_global_flag = vvtqol_singleplayer
+            }
+			
+            NOT = {
+                has_global_flag = vvtqol_kamchatkan_natives_deleted
+			}
+		}
+
+        allow = {
+            custom_trigger_tooltip = {
+                tooltip = vvtqol_singleplayer_or_game_master_tooltip
+            }
+        }
+
+        effect = {
+            hidden_effect = {
+                set_global_flag = vvtqol_kamchatkan_natives_deleted
+                east_siberia_region = {
+                    limit = {
+                        owner = {
+                            technology_group = chinese
+                        }
+                    }
+
+                    cede_province = ---
+                    every_owned_province = {
+						limit = {
+							has_building = fort_15th
+						}
+						remove_building = fort_15th
+					}
+                }
+            }
+        }
+    }
+
+    # Game master decision to allow no aggressive expansion
+    vvtqol_allow_no_aggressive_expansion = {
+        color = { 152 4 82 }
+        potential = {
+			has_country_flag = vvtqol_decisions_enabled
+            has_country_flag = vvtqol_game_master
+
+            NOT = {
+                has_global_flag = vvtqol_no_aggressive_expansion_allowed
+			}
+		}
+
+		allow = {}
+
+        effect = {
+            set_global_flag = vvtqol_no_aggressive_expansion_allowed
+		}
+    }
+
+    # Game master decision to allow no governing capacity
+    vvtqol_allow_no_governing_capacity = {
+        color = { 152 4 82 }
+        potential = {
+			has_country_flag = vvtqol_decisions_enabled
+            has_country_flag = vvtqol_game_master
+			
+            NOT = {
+                has_global_flag = vvtqol_no_governing_capacity_allowed
+			}
+		}
+
+		allow = {}
+		
+        effect = {
+            set_global_flag = vvtqol_no_governing_capacity_allowed
+		}
+    }
+
+    # Game master decision to allow instant change of national focus
+    vvtqol_allow_instant_national_focus = {
+        color = { 152 4 82 }
+        potential = {
+			has_country_flag = vvtqol_decisions_enabled
+            has_country_flag = vvtqol_game_master
+			
+            NOT = {
+                has_global_flag = vvtqol_instant_national_focus_allowed
+			}
+		}
+		
+		allow = {}
+
+        effect = {
+            set_global_flag = vvtqol_instant_national_focus_allowed
+        }
+    }
+
+    # Per player toggle to enable instant national focus change
+    vvtqol_enable_instant_national_focus = {
+        color = { 152 4 82 }
+        potential = {
+			has_country_flag = vvtqol_decisions_enabled
+            OR = {
+                has_global_flag = vvtqol_instant_national_focus_allowed
+                has_global_flag = vvtqol_singleplayer
+            }
+            
+            NOT = {
+				has_country_modifier = vvtqol_instant_national_focus
+			}
+		}
+
+        allow = {
+            custom_trigger_tooltip = {
+                tooltip = vvtqol_singleplayer_or_game_master_tooltip
+            }
+        }
+		
+		effect = {
+			add_country_modifier = {
+				name = vvtqol_instant_national_focus
+				duration = -1
+			}
+		}
+    }
+
+    # Per player toggle to disable instant national focus change
+    vvtqol_disable_instant_national_focus = {
+        color = { 152 4 82 }
+        potential = {
+			has_country_flag = vvtqol_decisions_enabled
+            has_country_modifier = vvtqol_instant_national_focus
+		}
+
+        allow = {
+            custom_trigger_tooltip = {
+                tooltip = vvtqol_singleplayer_or_game_master_tooltip
+            }
+        }
+		
+		effect = {
+			remove_country_modifier = vvtqol_instant_national_focus
+		}
+    }
+	
+	# Game master decision to allow educate ruler mechanic
+    vvtqol_allow_educate_ruler = {
+        color = { 152 4 82 }
+        potential = {
+			has_country_flag = vvtqol_decisions_enabled
+            has_country_flag = vvtqol_game_master
+			
+            NOT = {
+                has_global_flag = vvtqol_educate_ruler_allowed
+			}
+		}
+		
+		allow = {
+            custom_trigger_tooltip = {
+                tooltip = vvtqol_singleplayer_or_game_master_tooltip
+            }
+        }
+
+        effect = {
+            set_global_flag = vvtqol_educate_ruler_allowed
+        }
+    }
+
+    # Enable educate ruler reminders 
+    vvtqol_enable_educate_ruler_reminder = {
+        color = { 152 4 82 }
+        potential = {
+			has_country_flag = vvtqol_decisions_enabled
+            has_global_flag = vvtqol_educate_ruler_allowed
+
+            NOT = {
+                has_country_flag = vvtqol_educate_ruler_reminder_enabled
+			}
+		}
+
+        effect = {
+            set_country_flag = vvtqol_educate_ruler_reminder_enabled
+        }
+    }
+    
+    # Disable educate ruler reminders 
+    vvtqol_disable_educate_ruler_reminder = {
+        color = { 152 4 82 }
+        potential = {
+			has_country_flag = vvtqol_decisions_enabled
+            has_country_flag = vvtqol_educate_ruler_reminder_enabled   
+            has_global_flag = vvtqol_educate_ruler_allowed
+        }
+
+        effect = {
+            clr_country_flag = vvtqol_educate_ruler_reminder_enabled
+        }
+    }
+
+    # Game master decision to allow automatic development
+    vvtqol_allow_automatic_development = {
+        color = { 152 4 82 }
+        potential = {
+			has_country_flag = vvtqol_decisions_enabled
+            has_country_flag = vvtqol_game_master
+			
+            NOT = {
+                has_global_flag = vvtqol_automatic_development_allowed
+			}
+		}
+		
+		allow = {}
+
+        effect = {
+            set_global_flag = vvtqol_automatic_development_allowed
+        }
+    }
+}

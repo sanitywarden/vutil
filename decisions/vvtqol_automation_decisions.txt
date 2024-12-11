@@ -1,0 +1,288 @@
+#########################################
+#			  Created by				#
+#			     Vivit					#
+#########################################
+
+country_decisions = {
+    # Enable automatic development
+    vvtqol_automationmenu_enable_automatic_development = {
+        color = { 190 50 150 }
+        potential = {
+            has_country_flag = vvtqol_automationmenu_enabled
+            NOT = { has_country_flag = vvtqol_automatic_development_enabled }
+        }
+
+        ai_will_do = {
+            factor = 0 
+        }
+
+        allow = {}
+
+        effect = {
+            set_country_flag = vvtqol_automatic_development_enabled
+        }
+    }
+
+    # Disable automatic development
+    vvtqol_automationmenu_disable_automatic_development = {
+        color = { 190 50 150 }
+        potential = {
+            has_country_flag = vvtqol_automationmenu_enabled
+            has_country_flag = vvtqol_automatic_development_enabled
+        }
+
+        ai_will_do = {
+            factor = 0 
+        }
+
+        allow = {}
+
+        effect = {
+            clr_country_flag = vvtqol_automatic_development_enabled
+        }
+    }
+
+    # Configure automatic development: automatic/constrained
+    vvtqol_automationmenu_configure_automatic_development = {
+        color = { 190 50 150 }
+        potential = {
+            has_country_flag = vvtqol_automationmenu_enabled
+        }
+
+        ai_will_do = {
+            factor = 0 
+        }
+
+        allow = {}
+
+        effect = {
+            country_event = {
+                id = vvtqol_events.12
+                days = 0
+            }
+        }
+    }
+
+    # Enable automation decisions toggle
+    vvtqol_automationmenu_enable = {
+        color = { 190 50 150 }
+        potential = {
+            ai = no
+            has_global_flag = vvtqol_automatic_development_allowed
+            NOT = {
+                has_country_flag = vvtqol_automationmenu_enabled
+            }
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {}
+
+        effect = {
+            set_country_flag = vvtqol_automationmenu_enabled
+        }
+    }
+
+    # Disable automation decisions toggle
+    vvtqol_automationmenu_disable = {
+        color = { 190 50 150 }
+        potential = {
+            ai = no
+            has_country_flag = vvtqol_automationmenu_enabled
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {}
+
+        effect = {
+            clr_country_flag = vvtqol_automationmenu_enabled
+        }
+    }
+
+    # Enable automation of base tax clicks
+    vvtqol_automationmenu_base_tax_enable = {
+        color = { 190 50 150 }
+        potential = {
+            has_country_flag = vvtqol_automationmenu_enabled
+            NOT = {
+                has_country_flag = vvtqol_automation_base_tax_enabled
+            }
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {}
+
+        effect = {
+            set_country_flag = vvtqol_automation_base_tax_enabled
+        }
+    }
+
+    # Disable automation of base tax clicks
+    vvtqol_automationmenu_base_tax_disable = {
+        color = { 190 50 150 }
+        potential = {
+            has_country_flag = vvtqol_automationmenu_enabled
+            has_country_flag = vvtqol_automation_base_tax_enabled
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {}
+
+        effect = {
+            clr_country_flag = vvtqol_automation_base_tax_enabled
+        }
+    }
+
+    # Enable automation of base production clicks
+    vvtqol_automationmenu_base_production_enable = {
+        color = { 190 50 150 }
+        potential = {
+            has_country_flag = vvtqol_automationmenu_enabled
+            NOT = {
+                has_country_flag = vvtqol_automation_base_production_enabled
+            }
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {}
+
+        effect = {
+            set_country_flag = vvtqol_automation_base_production_enabled
+        }
+    }
+
+    # Disable automation of base production clicks
+    vvtqol_automationmenu_base_production_disable = {
+        color = { 190 50 150 }
+        potential = {
+            has_country_flag = vvtqol_automationmenu_enabled
+            has_country_flag = vvtqol_automation_base_production_enabled
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {}
+
+        effect = {
+            clr_country_flag = vvtqol_automation_base_production_enabled
+        }
+    }
+
+    # Enable automation of base manpower clicks
+    vvtqol_automationmenu_base_manpower_enable = {
+        color = { 190 50 150 }
+        potential = {
+            has_country_flag = vvtqol_automationmenu_enabled
+            NOT = {
+                has_country_flag = vvtqol_automation_base_manpower_enabled
+            }
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {}
+
+        effect = {
+            set_country_flag = vvtqol_automation_base_manpower_enabled
+        }
+    }
+
+    # Disable automation of base manpower clicks
+    vvtqol_automationmenu_base_manpower_disable = {
+        color = { 190 50 150 }
+        potential = {
+            has_country_flag = vvtqol_automationmenu_enabled
+            has_country_flag = vvtqol_automation_base_manpower_enabled
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {}
+
+        effect = {
+            clr_country_flag = vvtqol_automation_base_manpower_enabled
+        }
+    }
+
+    # Set powerpoints requirement for automatic development
+    vvtqol_set_powerpoints_requirement = {
+        color = { 190 50 150 }
+        potential = {
+            has_country_flag = vvtqol_automationmenu_enabled
+        } 
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {}
+
+        effect = {
+            country_event = {
+                id = vvtqol_events.7
+                days = 0
+            }
+        }
+    }
+
+    # Set allowed regions for automatic development/building
+    vvtqol_set_allowed_regions = {
+        color = { 190 50 150 }
+        potential = {
+            has_country_flag = vvtqol_automationmenu_enabled
+            NOT = { has_country_flag = vvtqol_optimal_automatic_development_enabled } 
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {}
+        effect = {
+            country_event = {
+                id = vvtqol_events.8
+                days = 0
+            }
+        }
+    }
+
+    vvtqol_set_development_target = {
+        color = { 190 50 150 }
+        potential = {
+            has_country_flag = vvtqol_automationmenu_enabled
+        }
+
+        ai_will_do = {
+            factor = 0
+        }
+
+        allow = {}
+
+        effect = {
+            country_event = {
+                id = vvtqol_events.13
+                days = 0
+            }
+        }
+    }
+}
